@@ -15,4 +15,4 @@ COMMENT ON COLUMN ratings.recipe_id IS 'Référence vers la recette notée';
 COMMENT ON COLUMN ratings.created_at IS 'Date et heure de création de la note';
 
 -- Application du trigger
-CREATE TRIGGER set_timestamp_tags BEFORE UPDATE ON comments FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamp();
+CREATE TRIGGER set_timestamp_tags BEFORE UPDATE ON ratings FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamp();
