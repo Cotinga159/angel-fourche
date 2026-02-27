@@ -1,7 +1,7 @@
 SELECT
     r.title,
     c.content,
-    u.name_user AS auteur_commentaire,
+    u.name_user AS author_comment,
     c.created_at
 FROM comments AS c
 JOIN recipes AS r
