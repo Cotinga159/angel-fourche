@@ -1,5 +1,5 @@
 SELECT
-    r.title
+    r.title,
     ROUND(AVG(rt.score), 2) AS average_rating,
     COUNT(rt.id_rating) AS total_votes
 FROM recipes AS r

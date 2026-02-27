@@ -4,5 +4,5 @@ SELECT
     r.difficulty
 FROM recipes AS r
 JOIN categories AS c
-    ON r.id_category = c.category_id;
+    ON r.category_id = c.id_category;
 

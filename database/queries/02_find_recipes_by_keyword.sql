@@ -7,8 +7,8 @@ SELECT
     difficulty
 FROM recipes
 WHERE
-    ($1 IS NULL OR type_flavor = $1)
-AND ($2 IS NULL OR type_diet = $2)
-AND ($3 IS NULL OR diet_religious = $3)
-AND ($4 IS NULL OR difficulty = $4)
-ORDER BY created_at
+    ('sucré' IS NULL OR type_flavor = 'sucré')
+AND ('vegetarien' IS NULL OR type_diet = 'vegetarien')
+AND ('aucun' IS NULL OR diet_religious = 'aucun')
+AND ('moyen' IS NULL OR difficulty = 'moyen')
+ORDER BY created_at;

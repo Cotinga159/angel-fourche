@@ -1,6 +1,6 @@
 CREATE OR REPLACE VIEW v_recipes_favorites AS
 SELECT
-    f.id_user,
+    f.user_id,
     u.name_user,
     r.id_recipe,
     r.title,

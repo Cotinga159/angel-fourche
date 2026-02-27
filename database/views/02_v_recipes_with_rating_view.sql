@@ -7,7 +7,7 @@ SELECT
     r.type_diet,
     r.diet_religious,
     r.created_at,
-    ROUND(AVG(n.score), 2) AS average_rating,
+    ROUND(AVG(rt.score), 2) AS average_rating,
     COUNT(rt.id_rating) AS ratings_count
 FROM recipes r
 LEFT JOIN ratings rt

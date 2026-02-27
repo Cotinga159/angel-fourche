@@ -193,7 +193,15 @@ Base de données
 
  - niveau_difficulte
 
+ - nombre_personne
+
  - photo
+
+ - type_regime
+
+ - regime-religieux
+
+ - type_saveur
 
  - date_creation
 
