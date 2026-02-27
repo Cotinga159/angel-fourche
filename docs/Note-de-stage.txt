@@ -1,0 +1,56 @@
+Jour 1
+Prise de connaissance du planing
+Choix du projet
+Creation du cahiers des charges
+ - Table requise
+ - Technologie qui sera utilisée
+ - Fonctionnalité
+ - Service demandée 
+
+Jour 2
+Création du prototype du logo
+Création du prototype de la page d’accueil sur Figma
+Apprentissage du fonctionnement de excel
+Création de l'excel contenant les tables
+ - Table users
+ - Table recipes
+ - Table comments
+
+Jour 3
+Création des autres tables restantes sur excel
+ - Table favorites
+ - Table categories
+ - Table ratings
+Mise à jour du cahier des charges afin d'ajouter les nouvelles tables
+Création des différentes tables dans le looping avec leurs jointure et également la table pivot
+
+Jour 4
+Finalisation du logo
+Debrief de l'avancement
+Avancement de la maquette de la page d’accueil, la page recette, inscription et connexion
+
+Jour 5
+Création sur Figma de la page detail de la recette
+ - page de la recette
+
+Jour 6
+Rédaction du dossier projet
+Création du repository sur git hub
+Création de l’arborescence du dossier migrations
+
+Jour 7
+Création et complexation des fichier contenu dans config
+
+Jour 8
+Création des différentes tables dans la base de donnée
+Création des fichiers de drop pour les tables et type
+
+Jour 9
+Ajout du seeders pour users
+Installation des package via le package.jon deja configuré
+Créations des queries
+
+Jour 10
+Création des views
+Création des autres seeders
+Fix des erreur dans queries et views
