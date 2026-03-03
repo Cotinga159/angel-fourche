@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # ============================================
-# 🐼 MEMORIA - DB Initialization Script
+# 🍽 Angel Fourche - DB Initialization Script
 # ============================================
 
 set -e
@@ -15,7 +15,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo -e "${GREEN}🐼 Memoria - Database Initialization${NC}\n"
+echo -e "${GREEN}🍽 Angel Fourche - Database Initialization${NC}\n"
 
 # --------------------------------------------
 # Load environment variables
@@ -28,8 +28,8 @@ fi
 export $(grep -v '^#' .env | xargs)
 
 DB_SUPERUSER=${DB_SUPERUSER:-postgres}
-DB_APP_USER=${DB_APP_USER:-app_memoria}
-DB_NAME=${DB_NAME:-memoria_db_dev}
+DB_APP_USER=${DB_APP_USER:-app_angel_fourche}
+DB_NAME=${DB_NAME:-angel_fourche_db_dev}
 
 # --------------------------------------------
 # Helpers
@@ -71,7 +71,7 @@ createdb -U "$DB_SUPERUSER" "$DB_NAME"
 # ============================================
 echo -e "\n${GREEN}⚙️ Phase 1: Core Configuration${NC}"
 
-execute_sql "database/migrations/config/01_add_roles_app.sql" \
+execute_sql "database/migrations/config/01_add_roles.sql" \
             "Creating application role" \
             "postgres" \
             "$DB_SUPERUSER"
@@ -123,4 +123,4 @@ fi
 echo -e "\n${GREEN}📊 Phase 6: Views${NC}"
 execute_directory "database/views" "$DB_NAME" "$DB_SUPERUSER"
 
-echo -e "\n${GREEN}✅ Memoria database is ready!${NC}"
+echo -e "\n${GREEN}✅ Angel Fourche database is ready!${NC}"

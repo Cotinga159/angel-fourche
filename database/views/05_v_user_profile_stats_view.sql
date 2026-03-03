@@ -1,3 +1,6 @@
+
+-- Vue du profil de l'utilisateur avec les stats
+
 CREATE OR REPLACE VIEW v_user_profile_stats AS
 SELECT
     u.id_user,

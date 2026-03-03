@@ -1,3 +1,6 @@
+
+-- Vue des commentaires avec auteur et recette
+
 CREATE OR REPLACE VIEW v_recipes_with_comments AS
 SELECT
     c.id_comment,

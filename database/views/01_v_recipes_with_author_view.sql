@@ -1,3 +1,6 @@
+
+-- Vue des recettes avec les informations de l'auteur
+
 CREATE OR REPLACE VIEW v_recipes_with_author AS
 SELECT
     r.id_recipe,

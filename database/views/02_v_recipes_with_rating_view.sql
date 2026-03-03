@@ -1,3 +1,6 @@
+
+-- Vue avec moyenne des notes + nombre de notes
+
 CREATE OR REPLACE VIEW v_recipes_with_rating AS
 SELECT
     r.id_recipe,

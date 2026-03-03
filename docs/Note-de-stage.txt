@@ -54,3 +54,10 @@ Jour 10
 Création des views
 Création des autres seeders
 Fix des erreur dans queries et views
+
+Jour 11
+Rédaction du dossier projet
+
+Jour 12
+Création du dossier public avec son arbroeccence
+Ajout des scripts sh : init, nuke, reset et run

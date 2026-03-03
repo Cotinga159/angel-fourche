@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS recipes (
 COMMENT ON TABLE recipes IS 'Recettes partagées par les utilisateurs, incluant ingrédients, étapes, temps, difficulté, type de régime, régime religieux et type de saveur';
 
 COMMENT ON COLUMN recipes.id_recipe IS 'Identifiant unique de la recette (UUID v7)';
-COMMENT ON COLUMN recipes.user_id IS 'Référence vers l\'utilisateur auteur de la recette';
+COMMENT ON COLUMN recipes.user_id IS 'Référence vers l utilisateur auteur de la recette';
 COMMENT ON COLUMN recipes.category_id IS 'Référence vers la catégorie de la recette';
 COMMENT ON COLUMN recipes.title IS 'Titre de la recette, insensible à la casse via CITEXT';
 COMMENT ON COLUMN recipes.description IS 'Description générale de la recette';
@@ -32,7 +32,7 @@ COMMENT ON COLUMN recipes.step IS 'Liste des étapes numérotées pour réaliser
 COMMENT ON COLUMN recipes.preparation_time IS 'Durée de préparation en minutes';
 COMMENT ON COLUMN recipes.serving IS 'Nombre de personnes prévues pour la recette';
 COMMENT ON COLUMN recipes.difficulty IS 'Niveau de difficulté : Facile, Moyen ou Difficile';
-COMMENT ON COLUMN recipes.picture IS 'URL ou chemin de l\'image associée à la recette';
+COMMENT ON COLUMN recipes.picture IS 'URL ou chemin de l image associée à la recette';
 COMMENT ON COLUMN recipes.type_diet IS 'Type de régime alimentaire : omnivore, vegetarien, vegan, pescetarien...';
 COMMENT ON COLUMN recipes.diet_religious IS 'Régime religieux : halal, casher ou aucun';
 COMMENT ON COLUMN recipes.type_flavor IS 'Type de saveur : sucré, salé ou amer';

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # ============================================
-# 🐼 MEMORIA - SQL Runner Utitlity
+# 🍽 Angel Fourche - SQL Runner Utility
 # ============================================
 # Usage: ./scripts/run_sql.sh <path_to_file> [db_name] [db_user]
 # ============================================
@@ -20,8 +20,8 @@ NC='\033[0m'
 if [ -f .env ]; then
     export $(grep -v '^#' .env | xargs)
     # Valeurs par défaut depuis le .env
-    DEFAULT_DB_USER=${DB_APP_USER:-app_memoria}
-    DEFAULT_DB_NAME=${DB_NAME:-memoria_db_dev}
+    DEFAULT_DB_USER=${DB_APP_USER:-app_angel_fourche}
+    DEFAULT_DB_NAME=${DB_NAME:-angel_fourche_db_dev}
 else
     echo -e "${RED}❌ Error: .env file not found! ${NC}"
     exit 1
@@ -52,7 +52,7 @@ fi
 
 # 4.
 #---------------------------------------------
-echo -e "${GREEN}🐼 MEMORIA - SQL Runner${NC}"
+echo -e "${GREEN}🍽 Angel Fourche - SQL Runner${NC}"
 echo -e "📁 File:    ${YELLOW}$FILE_PATH${NC}"
 echo -e "🗄️ Target:    ${BLUE}$TARGET_DB${NC} (as $TARGET_USER)"
 

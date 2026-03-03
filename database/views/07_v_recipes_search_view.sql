@@ -1,3 +1,6 @@
+
+-- Vue optimisé pour les recherches
+
 CREATE OR REPLACE VIEW v_recipes_search AS
 SELECT
     r.id_recipe,

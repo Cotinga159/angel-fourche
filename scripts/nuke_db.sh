@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # ============================================
-# 🐼 MEMORIA - FULL NUKE SCRIPT
+# 🍽 Angel Fourche - FULL NUKE SCRIPT
 # Action: Supprime entièrement la base ET le rôle
 # ============================================
 
@@ -17,8 +17,8 @@ if [ -f .env ]; then
     export $(grep -v '^#' .env | xargs)
     # Pour nuke, on a besoin du compte super-utilisateur (souvent postgres)
     DB_SUPERUSER=${POSTGRES_USER:-postgres}
-    DB_NAME=${POSTGRES_DB:-memoria_db_dev}
-    APP_ROLE="app_memoria"
+    DB_NAME=${POSTGRES_DB:-angel_fourche_db_dev}
+    APP_ROLE="app_angel_fourche"
 else
     echo -e "${RED}❌ .env file missing!${NC}"
     exit 1

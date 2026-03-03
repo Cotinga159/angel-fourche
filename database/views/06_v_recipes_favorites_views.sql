@@ -1,3 +1,6 @@
+
+-- Vue des recettes mises en favoris
+
 CREATE OR REPLACE VIEW v_recipes_favorites AS
 SELECT
     f.user_id,

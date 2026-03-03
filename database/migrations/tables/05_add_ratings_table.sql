@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS ratings (
 COMMENT ON TABLE ratings IS 'Notes attribuées par les utilisateurs aux recettes';
 COMMENT ON COLUMN ratings.id_rating IS 'Identifiant unique de la note (UUID v7)';
 COMMENT ON COLUMN ratings.score IS 'Score de la recette, entier entre 1 et 5';
-COMMENT ON COLUMN ratings.user_id IS 'Référence vers l\'utilisateur auteur de la note';
+COMMENT ON COLUMN ratings.user_id IS 'Référence vers l utilisateur auteur de la note';
 COMMENT ON COLUMN ratings.recipe_id IS 'Référence vers la recette notée';
 COMMENT ON COLUMN ratings.created_at IS 'Date et heure de création de la note';
 

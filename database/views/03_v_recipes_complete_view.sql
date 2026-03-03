@@ -1,3 +1,6 @@
+
+-- Vue avec auteur, catégorie et note moyenne
+
 CREATE OR REPLACE VIEW v_recipes_complete AS
 SELECT
     r.id_recipe,
