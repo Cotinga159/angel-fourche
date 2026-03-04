@@ -61,3 +61,69 @@ Rédaction du dossier projet
 Jour 12
 Création du dossier public avec son arborescence
 Ajout des scripts sh : init, nuke, reset et run
+Création du dossier src avec son arborescence
+Création des fichier dans src/config
+Création des fichier dans src/entities
+
+
+1 config/
+
+Commence par la config de la base de données, JWT, variables d’environnement.
+
+Sans ça, rien d’autre ne peut fonctionner.
+
+2 entities/ (ou models si tu préfères)
+
+Définis tes entités : User, Recipe, Category, Comment.
+
+Même si tu n’utilises pas ORM, ça te sert de référence pour les tables et les DTO.
+
+3 repositories/
+
+Crée les fonctions pour accéder à la base de données (CRUD).
+
+Ex : userRepository.js, recipeRepository.js.
+
+4 services/
+
+Implémente la logique métier : validation des droits, calcul de notes, ajout de recette, etc.
+
+Ces services utiliseront tes repositories.
+
+5 validators/
+
+Créé les validateurs pour les données entrantes (email, mot de passe, recette valide, etc.).
+
+6 controllers/
+
+Implémente les endpoints qui utilisent les services et validators.
+
+Ex : recipeController.js, userController.js.
+
+7 routes/
+
+Lie tes controllers aux URLs (express Router).
+
+Ex : /recipes, /users.
+
+8 middlewares/
+
+Authentification, gestion des erreurs, vérification des rôles.
+
+Tu peux les créer en parallèle ou après les controllers/routes.
+
+9 utils/
+
+Fonctions utilitaires, helpers (hash password, générer token, formatage date, etc.).
+
+À utiliser dans services ou middleware si besoin.
+
+10 views/
+
+Si tu as du front côté serveur (templates, ejs/pug), sinon tu peux le faire après le backend fonctionnel.
+
+11 dto/
+
+Optionnel : si tu veux définir les objets d’entrée/sortie.
+
+Peut être fait en parallèle des validators/services.

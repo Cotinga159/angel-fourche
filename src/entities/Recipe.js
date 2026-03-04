@@ -43,6 +43,10 @@ class Recipe {
         if (data.comments_list) {
             this.comments = data.comments_list.map(c => new Comment(c));
         }
+
+        if (data.author_name) {
+            this.author = { id: data.id_user, name: data.author_name, email: data.author_email, };
+        }
     }
 
     static fromDatabase(row) {
