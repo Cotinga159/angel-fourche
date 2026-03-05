@@ -45,6 +45,51 @@ class RecipeRepository {
         return rows.map((row) => new Recipe(row));
     }
 
+    // Liste des recettes avec auteur et rating
+
+static async findAllWithRatings() {
+        const query = /*sql*/ `
+        SELECT *
+        FROM v_recipes_with_rating_view
+        ORDER BY created_at DESC;
+        `;
+        const { rows } = await db.query(query);
+        return rows.map((row) => new Recipe(row));
+    }
+      // Liste des recettes avec commentaires
+    static async findAllWithComments() {
+        const query = /*sql*/ `
+        SELECT *
+        FROM v_recipes_with_comments_view
+        ORDER BY created_at DESC;
+        `;
+        const { rows } = await db.query(query);
+        return rows.map((row) => new Recipe(row));
+    }
+
+        // Liste des recettes complètes (auteur, rating, commentaires)
+    static async findAllComplete() {
+        const query = /*sql*/ `
+        SELECT *
+        FROM v_recipes_complete_view
+        ORDER BY created_at DESC;
+        `;
+        const { rows } = await db.query(query);
+        return rows.map((row) => new Recipe(row));
+    }
+
+        // Recherche de recettes par mot clé
+    static async searchByKeyword(keyword) {
+        const query = /*sql*/ `
+        SELECT *
+        FROM v_recipes_search_view
+        WHERE title ILIKE $1 OR description ILIKE $1
+        ORDER BY created_at DESC;
+        `;
+        const { rows } = await db.query(query, [`%${keyword}%`]);
+        return rows.map((row) => new Recipe(row));
+    }
+    
     static async create(data) {
         const query = /*sql*/ `
         INSERT INTO recipes (
@@ -99,7 +144,41 @@ class RecipeRepository {
             diet_religious = COALESCE($7, diet_religious),
             type_flavor = COALESCE($8, type_flavor)
         WHERE id_recipe = $9
-        RETURNING *;
-        `
+        RETURNING 
+            id_recipe,
+            user_id,
+            category_id,
+            title,
+            description,
+            ingredient,
+            step,
+            preparation_time,
+            serving,
+            difficulty,
+            picture,
+            type_diet,
+            diet_religious,
+            type_flavor,
+            created_at,
+            updated_at
+        `;
+
+        const values = [
+        data.description ?? null,
+        data.ingredient ?? null,
+        data.step ?? null,
+        data.difficulty ?? null,
+        data.picture ?? null,
+        data.typeDiet ?? null,
+        data.dietReligious ?? null,
+        data.typeFlavor ?? null,
+        id, 
+        ];
+        
+                const { rows } = await db.query(query, values);
+                return rows[0] ? new Recipe(rows[0]) : null;
+
     }
 }
+
+export default RecipeRepository;
