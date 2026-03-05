@@ -65,6 +65,17 @@ Création du dossier src avec son arborescence
 Création des fichier dans src/config
 Création des fichier dans src/entities
 
+Jour 13
+
+Création des fichier dans src/repositories
+ - Finalisation de PgUserRepository.js
+
+Jour 14
+
+Finalisation des autres fichiers dans src/repositories
+Création des fichiers dans src/utils
+Création des fichiers dans src/services
+Création des fichiers dans src/controllers
 
 1 config/
 
