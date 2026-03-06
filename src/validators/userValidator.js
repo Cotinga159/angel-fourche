@@ -28,7 +28,6 @@ const stringToBoolean = z
  */
 export const registerSchema = z.object({
     email: z
-    .string()
     .email({ message: "Format d'email invalide" })
     .min(5, { message: "L'email doit contenir au moins 5 caractères" })
     .max(255, { message: "L'email ne peut pas dépasser 255 caractères" }),
@@ -55,7 +54,7 @@ export const registerSchema = z.object({
  * Schéma de connexion
  */
 export const loginSchema = z.object({
-    email: z.string().email({ message: "Format d'email invalide" }).min(5).max(255),
+    email: z.email({ message: "Format d'email invalide" }).min(5).max(255),
     password: z.string().min(1, { message: "Mot de passe requis" }),
 });
 
@@ -64,7 +63,7 @@ export const loginSchema = z.object({
  * - tous optionnels ; transforme gdpr_consent si envoyé
  */
 export const updateProfileSchema = z.object({
-    email: z.string().email({ message: "Format d'email invalide" }).min(5).max(255).optional(),
+    email: z.email({ message: "Format d'email invalide" }).min(5).max(255).optional(),
     password: z.string().min(passwordMin).max(100).optional(),
     name_user: z.string().min(3).max(50).regex(PSEUDO_REGEX).optional(),
     gdpr_consent: stringToBoolean,
@@ -76,4 +75,3 @@ export const schemas = {
     login: loginSchema,
     updateProfile: updateProfileSchema,
 };
-
