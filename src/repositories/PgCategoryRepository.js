@@ -1,6 +1,6 @@
 "use strict";
 
-import db from "../config/database";
+import db from "../config/database.js";
 import Category from "../entities/Category.js";
 
 

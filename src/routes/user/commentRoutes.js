@@ -11,12 +11,12 @@ const router = Router();
  */
 
 // Ajouter un commentaire à une recette
-router.post("/:recipeId", requireAuth, CommentController.addComment);
+router.post("/:recipeId", requireAuth, CommentController.create);
 
 // Voir tous les commentaires d'une recette
-router.get("/:recipeId", CommentController.getComments);
+// router.get("/:recipeId", CommentController.getComments);
 
 // Supprimer un commentaire personnel
-router.post("/:commentId/delete", requireAuth, CommentController.deleteComment);
+router.post("/:commentId/delete", requireAuth, CommentController.delete);
 
 export default router;

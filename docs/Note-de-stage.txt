@@ -77,6 +77,15 @@ Création des fichiers dans src/utils
 Création des fichiers dans src/services
 Création des fichiers dans src/controllers
 
+Jour 15
+
+Correction des validators
+Création des fichiers dans src/middlewares
+Création des fichiers dans src/routes
+Création du fichiers app.js
+Correction des erreurs dans routes
+Création du fichiers src/views/pages/home.ejs et et les deux pages error dans pages/errors et de views/layouts/home.ejs
+
 1 config/
 
 Commence par la config de la base de données, JWT, variables d’environnement.

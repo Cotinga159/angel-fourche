@@ -14,7 +14,7 @@ const router = Router();
  * 📚 Liste des catégories
  * GET /categories
  */
-router.get("/", CategoryController.index);
+// router.get("/", CategoryController.index);
 
 /**
  * ➕ Créer une nouvelle catégorie

@@ -118,12 +118,12 @@ app.listen(PORT, () => {
     console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   🍽 Angel Fourche - Transmission de s'avoir           ║
+║   🍽 Angel Fourche - Transmission de s'avoir               ║
 ║                                                           ║
-║   🛰 Serveur lancé avec succès !                         ║
-║   🌆 URL: http://localhost:${PORT}                         ║
-║   🏜 Environnement: ${process.env.NODE_ENV || "development"}                      ║
-║   🎂 Démarré le: ${new Date().toLocaleString("fr-FR")}    ║
+║   🛰 Serveur lancé avec succès !                           ║
+║   🌆 URL: http://localhost:${PORT}                            ║
+║   🏜 Environnement: ${process.env.NODE_ENV || "development"}                            ║
+║   🎂 Démarré le: ${new Date().toLocaleString("fr-FR")}                       ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
     `);

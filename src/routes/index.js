@@ -3,7 +3,7 @@
 import { Router } from "express";
 
 // 🌍 Public
-import homeRoutes from "./public/homeRoutes.js"; // Page d'accueil et autres pages publiques
+import homeRoutes from "./public/homeController.js"; // Page d'accueil et autres pages publiques
 import recipeRoutes from "./public/recipeRoutes.js"; // Routes pour les recettes accessibles au public
 
 // 🔐 Auth & compte
@@ -14,7 +14,6 @@ import profileRoutes from "./user/profileRoutes.js"; // Routes pour l'édition d
 import recipeUserRoutes from "./user/recipeRoutes.js"; // Routes pour les recettes de l'utilisateur (ajouter, modifier, supprimer)
 import commentUserRoutes from "./user/commentRoutes.js"; // Routes pour les commentaires de l'utilisateur (ajouter, supprimer)
 import ratingRoutes from "./user/ratingRoutes.js"; // Routes pour la gestion des évaluations (notes) des recettes
-import categoryRoutes from "./user/categoryRoutes.js"; // Routes pour la gestion des catégories de recettes
 
 // 📊 Admin
 import recipeAdminRoutes from "./admin/recipeRoutes.js"; // Routes pour la gestion des recettes par l'admin
@@ -50,7 +49,6 @@ router.use(profileRoutes); // Routes pour gérer les profils utilisateurs
 router.use(recipeUserRoutes); // Routes pour la gestion des recettes des utilisateurs
 router.use(commentUserRoutes); // Routes pour la gestion des commentaires des utilisateurs
 router.use(ratingRoutes); // Routes pour les évaluations des recettes
-router.use(categoryRoutes); // Routes pour la gestion des catégories des recettes
 
 // ==================
 // 📊 ADMIN

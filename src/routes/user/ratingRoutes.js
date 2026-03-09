@@ -14,12 +14,12 @@ const router = Router();
  * ➕ Ajouter une évaluation pour une recette
  * POST /ratings/:recipeId
  */
-router.post("/:recipeId", requireAuth, RatingController.addRating);
+router.post("/:recipeId", requireAuth, RatingController.rateRecipe);
 
 /**
  * 🏆 Afficher les évaluations d'une recette (peut être intégré à la page de recette)
  * GET /ratings/:recipeId
  */
-router.get("/:recipeId", RatingController.getRatings);
+// router.get("/:recipeId", RatingController.getRatings);
 
 export default router;

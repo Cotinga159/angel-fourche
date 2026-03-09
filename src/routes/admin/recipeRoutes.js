@@ -20,12 +20,12 @@ router.use(requireAdmin);
  * 🗑️ Suppression d'une recette par un admin
  * DELETE /admin/recipes/:id
  */
-router.delete("/recipes/:id", RecipeController.adminDelete);
+router.delete("/recipes/:id", RecipeController.delete);
 
 /**
  * 👀 Liste de toutes les recettes
  * GET /admin/recipes
  */
-router.get("/recipes", RecipeController.adminIndex);
+router.get("/recipes", RecipeController.index);
 
 export default router;
