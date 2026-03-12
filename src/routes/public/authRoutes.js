@@ -1,66 +1,18 @@
 "use strict";
-
 import { Router } from "express";
-import { validate } from "../../middlewares/validationMiddleware.js";
-import { injectCsrfToken } from "../../middlewares/csrfMiddleware.js";
-
-import { schemas as authSchemas } from "../../validators/userValidator.js";
 import AuthController from "../../controllers/auth/AuthController.js";
-import { requireGuest, requireAuth } from "../../middlewares/authMiddleware.js";
-import { generateToken, doubleCsrfProtection } from "../../config/security.js";
+import { doubleCsrfProtection } from "../../config/security.js";
 
 const router = Router();
 
-/**
- * Routes Auth
- *
- * @see docs/api-endpoints.md#auth
- */
+router.get("/auth/register", AuthController.showRegister);
+router.post("/auth/register", AuthController.handleRegister);
+// router.post("/auth/register", doubleCsrfProtection, AuthController.handleRegister);
 
-/* ─────────────────────────────────────────
- * 🧾 Inscription
- * ───────────────────────────────────────── */
-router.get(
-    "/register",
-    requireGuest,
-    injectCsrfToken(generateToken),
-    AuthController.showRegister,
-);
+router.get("/auth/login", AuthController.showLogin);
+router.post("/auth/login", AuthController.handleLogin);
+// router.post("/auth/login", doubleCsrfProtection, AuthController.handleLogin);
 
-router.post(
-    "/register",
-    requireGuest,
-    doubleCsrfProtection,
-    AuthController.handleRegister,
-);
-
-/* ─────────────────────────────────────────
- * 🔐 Connexion
- * ───────────────────────────────────────── */
-router.get(
-    "/login",
-    requireGuest,
-    injectCsrfToken(generateToken),
-    AuthController.showLogin,
-);
-
-router.post(
-    "/login",
-    requireGuest,
-    validate(authSchemas.login),
-    doubleCsrfProtection,
-    AuthController.handleLogin,
-);
-
-/* ─────────────────────────────────────────
- * 🚪 Déconnexion
- * ───────────────────────────────────────── */
-router.post(
-    "/logout",
-    requireAuth,
-    doubleCsrfProtection,
-    AuthController.logout,
-);
-
+router.post("/auth/logout", AuthController.logout);
+console.log(">>> authRoutes chargé ✅");
 export default router;
-

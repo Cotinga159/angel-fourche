@@ -9,7 +9,8 @@ class CommentController {
    */
     async create(req, res) {
     try {
-        const { recipeId, content } = req.body;
+        const recipeId = req.params.recipeId;
+        const { content } = req.body;
         const userId = req.session.userId;
 
         if (!userId) {

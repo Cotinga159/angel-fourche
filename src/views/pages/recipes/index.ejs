@@ -1,0 +1,12 @@
+<% recipes.forEach(recipe => { %>
+    <a href="/recipes/<%= recipe.id %>">
+        <div class="recipe-card">
+            <h2><%= recipe.title %></h2>
+            <p><%= recipe.description %></p>
+            <p>Difficulté: <%= recipe.difficulty %></p>
+            <% if (recipe.picture) { %>
+                <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+            <% } %>
+        </div>
+    </a>
+<% }) %>

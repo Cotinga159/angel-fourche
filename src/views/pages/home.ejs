@@ -1,20 +1,59 @@
 <!-- src/views/pages/home.ejs -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil</title>
-</head>
-<body>
+
     <header>
-        <h1>Bienvenue sur la page d'accueil</h1>
+        <h1>Bienvenue sur Angel Fourche</h1>
     </header>
     <main>
-        <p>Ceci est le contenu de la page d'accueil.</p>
+        <% if (!recipes || recipes.length === 0) { %>
+            <p>Aucune recette disponible pour le moment.</p>
+        <% } else { %>
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe-card">
+                    <h2><%= recipe.title %></h2>
+                    <p><%= recipe.description %></p>
+                    <p>Préparation: <%= recipe.preparationTime %> min</p>
+                    <p>Difficulté: <%= recipe.difficulty %></p>
+
+                    <% if (recipe.picture) { %>
+                        <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                    <% } %>
+<span class="stars">
+    <% for(let i = 1; i <= 5; i++) { %>
+        <% if(i <= Math.round(recipe.averageRating)) { %>
+            <span class="star full">★</span>
+        <% } else { %>
+            <span class="star empty">☆</span>
+        <% } %>
+    <% } %>
+</span>
+<small><%= recipe.averageRating %>/5</small>
+                    <h3>Ingrédients :</h3>
+                    <% if (recipe.ingredient && Array.isArray(recipe.ingredient)) { %>
+                        <ul>
+                            <% recipe.ingredient.forEach(ing => { %>
+                                <%= ing.quantity %> <%= ing.unit %> — <%= ing.name %>
+                            <% }) %>
+                        </ul>
+                    <% } %>
+
+                    <h3>Étapes :</h3>
+                    <% if (recipe.step && Array.isArray(recipe.step)) { %>
+                        <ol>
+                            <% recipe.step.forEach(s => { %>
+                                <li><%= s.instruction %></li>
+                            <% }) %>
+                        </ol>
+                    <% } %>
+
+                    <div>
+                        Captured on <%= new Date(recipe.createdAt).toLocaleDateString() %> at
+                        <%= new Date(recipe.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
     </main>
     <footer>
-        <p>&copy; 2026 Mon application</p>
+        <p>&copy; 2026 Angel Fourche</p>
     </footer>
-</body>
-</html>
+

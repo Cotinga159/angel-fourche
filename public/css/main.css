@@ -1,0 +1,12 @@
+.star {
+    font-size: 30px;
+}
+
+.star.full {
+    color: #FFC308;          
+    -webkit-text-stroke: 1px grey;
+}
+
+.star.empty {
+    color: grey;      
+}

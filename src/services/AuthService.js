@@ -7,6 +7,7 @@ import { hashPassword, verifyPassword } from "../utils/passwordHelper.js";
 class AuthService {
 
     static async register({ email, password, nameUser, gdprConsent }) {
+         console.log(">>> AuthService.register appelé", { email, nameUser });
     if (await UserRepository.existsByEmail(email)) {
         throw new Error("Cet email est déjà utilisé.");
     }
@@ -14,14 +15,14 @@ class AuthService {
     if (await UserRepository.existsByNameUser(nameUser)) {
         throw new Error("Ce nom d'utilisateur est déjà utilisé.");
     }
-
+  console.log(">>> hashPassword...");
     const passwordHash = await hashPassword(password);
-
+ console.log(">>> UserRepository.create...");
     return UserRepository.create({
         email,
         passwordHash,
-        name_user: nameUser,
-        gdpr_consent: gdprConsent,
+        nameUser: nameUser,
+        gdprConsent: gdprConsent,
     });
     }
 

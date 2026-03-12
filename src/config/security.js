@@ -83,10 +83,11 @@ if (!isTestEnv) {
      * Identifiant de pseudo-session stable (SSR friendly)
      * @see https://github.com/Psifi-Solutions/csrf-csrf#without-express-session
      */
-    getSessionIdentifier: () => "dev-session",
+    getSessionIdentifier: (req) => req.session.id,
 
     cookieName: process.env.NODE_ENV === "production" ? "__Host-csrf" : "csrf",
-
+    csrfTokenFieldName: "_csrf",
+    
     cookieOptions: {
       httpOnly: true,
       sameSite: "lax",

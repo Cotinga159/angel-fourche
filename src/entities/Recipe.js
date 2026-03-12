@@ -9,8 +9,15 @@ class Recipe {
         this.categoryId = data.category_id;
         this.title = data.title;
         this.description = data.description;
-        this.ingredient = data.ingredient;
-        this.step = data.step;
+
+this.ingredient = Array.isArray(data.ingredient)
+    ? data.ingredient
+    : (typeof data.ingredient === 'string' ? JSON.parse(data.ingredient || "[]") : []);
+
+this.step = Array.isArray(data.step)
+    ? data.step
+    : (typeof data.step === 'string' ? JSON.parse(data.step || "[]") : []);
+        
         this.preparationTime = data.preparation_time;
         this.serving = data.serving;
         this.difficulty = data.difficulty;

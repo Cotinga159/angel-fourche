@@ -27,6 +27,10 @@ class RecipeService {
         return RecipeRepository.create(data);
     }
 
+    static async getAll() {
+    return RecipeRepository.findAllComplete();
+}
+
     static async update(recipeId, data) {
 
         return RecipeRepository.update(recipeId, data);

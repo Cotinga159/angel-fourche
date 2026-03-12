@@ -47,7 +47,7 @@ router.use(profileRoutes); // Routes pour gérer les profils utilisateurs
 // 📦 MÉTIER (Utilisateur)
 // ==================
 router.use(recipeUserRoutes); // Routes pour la gestion des recettes des utilisateurs
-router.use(commentUserRoutes); // Routes pour la gestion des commentaires des utilisateurs
+router.use("/comments", commentUserRoutes); // Routes pour la gestion des commentaires des utilisateurs
 router.use(ratingRoutes); // Routes pour les évaluations des recettes
 
 // ==================

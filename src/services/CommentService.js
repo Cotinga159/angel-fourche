@@ -9,7 +9,7 @@ class CommentService {
     }
 
     // Créer un commentaire
-    static async add(userId, recipeId, content) {
+    static async addComment(userId, recipeId, content) {
         if (!content || content.trim() === "") {
             throw new Error("Le contenu ne peut pas être vide");
         }
@@ -19,9 +19,12 @@ class CommentService {
             content: content.trim(),
         });
     }
-
+// Récupérer les commentaires d'une recette
+static async getByRecipeId(recipeId) {
+    return CommentRepository.findByRecipeId(recipeId);
+}
     // Supprimer un commentaire par ID
-    static async delete(commentId) {
+    static async deleteComment(commentId, userId) {
         return CommentRepository.delete(commentId);
     }
 

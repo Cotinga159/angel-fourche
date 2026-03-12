@@ -1,6 +1,7 @@
 "use strict";
 
 import AuthService from "../../services/AuthService.js";
+import { generateToken } from "../../config/security.js";
 
 /**
  * AuthController
@@ -20,7 +21,7 @@ class AuthController {
 
     res.render("pages/auth/register", {
         title: "Inscription - Angel Fourche",
-        csrfToken: req.csrfToken(),
+        // csrfToken:generateToken(req, res),
     });
     }
 
@@ -28,10 +29,13 @@ class AuthController {
    * Traite l'inscription
    */
     async handleRegister(req, res) {
+         console.log(">>> handleRegister appelé", req.body);
     try {
         await AuthService.register(req.body);
         // console.log("🔥 REGISTER HIT", req.body);
-
+   
+    console.log("CSRF cookie:", req.cookies.csrf);
+    console.log("BODY reçu :", req.body);
         req.flash("success", "Compte créé avec succès ✅");
         res.redirect("/auth/login");
     } catch (error) {
@@ -50,7 +54,7 @@ class AuthController {
 
     res.render("pages/auth/login", {
         title: "Connexion - Angel Fourche",
-        csrfToken: req.csrfToken(),
+        // csrfToken: generateToken(req, res),
     });
     }
 

@@ -30,7 +30,10 @@ class RecipeRepository {
         `;
 
         const { rows } = await db.query(query, [id]);
-        return rows[0] ? new Recipe(rows[0]) : null;
+        if (!rows[0]) return null;
+    rows[0].step = Array.isArray(rows[0].step) ? rows[0].step : [];
+    rows[0].ingredient = Array.isArray(rows[0].ingredient) ? rows[0].ingredient : [];
+    return new Recipe(rows[0]);
     }
 
     static async findByUserId(userId) {
@@ -71,11 +74,17 @@ static async findAllWithRatings() {
     static async findAllComplete() {
         const query = /*sql*/ `
         SELECT *
-        FROM v_recipes_complete_view
+        FROM v_recipes_complete
         ORDER BY created_at DESC;
         `;
         const { rows } = await db.query(query);
-        return rows.map((row) => new Recipe(row));
+            
+        return rows.map(row => {
+        // JSONB est déjà parsé par pg → pas besoin de JSON.parse !
+        row.step = Array.isArray(row.step) ? row.step : [];
+        row.ingredient = Array.isArray(row.ingredient) ? row.ingredient : [];
+        return new Recipe(row);
+    });
     }
 
         // Recherche de recettes par mot clé

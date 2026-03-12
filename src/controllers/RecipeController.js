@@ -1,6 +1,7 @@
 "use strict";
 
 import RecipeService from "../services/RecipeService.js";
+import CommentService from "../services/CommentService.js";
 
 class RecipeController {
 
@@ -28,15 +29,20 @@ class RecipeController {
     try {
         const recipe = await RecipeService.getById(req.params.id);
         if (!recipe) {
-        return res.status(404).render("pages/errors/404");
+            return res.status(404).render("pages/errors/404");
         }
+
+        const comments = await CommentService.getByRecipeId(req.params.id); // ← ajoute ça
+
         res.render("pages/recipes/show", {
-        title: recipe.title,
-        recipe,
+            title: recipe.title,
+            recipe,
+            comments,
+            user: req.session.userId ?? null,
         });
     } catch (error) {
-        req.flash("error", error.message);
-        res.redirect("back");
+         console.error("Erreur RecipeController.show:", error); // ← pour voir l'erreur réelle
+        res.redirect("/recipes");
     }
     }
 

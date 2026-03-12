@@ -1,0 +1,32 @@
+<main>
+    <h1>Inscription</h1>
+
+   <% if (locals.flash && locals.flash.error) { %>
+    <p style="color:red"><%= locals.flash.error %></p>
+<% } %>
+<% if (locals.flash && locals.flash.success) { %>
+    <p style="color:green"><%= locals.flash.success %></p>
+<% } %>
+
+    <form action="/auth/register" method="POST">
+
+
+        <label>Nom d'utilisateur</label>
+        <input type="text" name="nameUser" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Mot de passe</label>
+        <input type="password" name="password" required>
+
+        <label>
+            <input type="checkbox" name="gdprConsent" value="true" required>
+            J'accepte les conditions d'utilisation
+        </label>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <p>Déjà un compte ? <a href="/auth/login">Se connecter</a></p>
+</main>
