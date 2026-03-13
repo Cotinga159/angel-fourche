@@ -18,4 +18,33 @@
         <% } %>
     <% } %>
 </span>
+<% if (user) { %>
+    <button 
+        class="favorite-btn" 
+        data-recipe-id="<%= recipe.id %>"
+        data-favorite="<%= favoriteIds.includes(recipe.id) %>">
+        <%= favoriteIds.includes(recipe.id) ? '❤️' : '🤍' %>
+    </button>
+<% } %>
+
 <% }) %>
+<script>
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const recipeId = btn.dataset.recipeId;
+            
+            try {
+                await fetch(`/favorites/${recipeId}`, { 
+    method: 'POST',
+    headers: { 'Accept': 'application/json' }
+});
+                
+                const isFav = btn.dataset.favorite === 'true';
+                btn.dataset.favorite = String(!isFav);
+                btn.textContent = !isFav ? '❤️' : '🤍';
+            } catch (err) {
+                console.error('Erreur favori:', err);
+            }
+        });
+    });
+</script>

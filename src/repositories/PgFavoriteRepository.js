@@ -15,7 +15,7 @@ class FavoriteRepository {
         `;
 
         const { rows } = await db.query(query, [userId, recipeId]);
-        return rows[0] ? new FavoriteEntity(rows[0]) : null;
+        return rows[0] ? { userId: rows[0].user_id, recipeId: rows[0].recipe_id } : null;
     }
 
     static async remove(userId, recipeId) {

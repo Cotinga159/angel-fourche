@@ -2,6 +2,7 @@
 
 import RecipeService from "../services/RecipeService.js";
 import CommentService from "../services/CommentService.js";
+import FavoriteService from "../services/FavoriteService.js";
 
 class RecipeController {
 
@@ -12,9 +13,20 @@ class RecipeController {
     try {
         const userId = req.session.userId || null;
         const recipes = await RecipeService.getAll(userId);
+        let favoriteIds = [];
+        if (userId) {
+            const favorites = await Promise.all(
+                recipes.map(r => FavoriteService.isFavorite(userId, r.id))
+            );
+            favoriteIds = recipes
+                .filter((_, i) => favorites[i])
+                .map(r => r.id);
+        }
         res.render("pages/recipes/index", {
         title: "Recettes",
         recipes,
+        favoriteIds,
+        user: userId,
         });
     } catch (error) {
         req.flash("error", error.message);
@@ -34,11 +46,16 @@ class RecipeController {
 
         const comments = await CommentService.getByRecipeId(req.params.id); // ← ajoute ça
 
+        const isFavorite = req.session.userId 
+    ? await FavoriteService.isFavorite(req.session.userId, req.params.id)
+    : false;
+
         res.render("pages/recipes/show", {
             title: recipe.title,
             recipe,
             comments,
             user: req.session.userId ?? null,
+            isFavorite,
         });
     } catch (error) {
          console.error("Erreur RecipeController.show:", error); // ← pour voir l'erreur réelle

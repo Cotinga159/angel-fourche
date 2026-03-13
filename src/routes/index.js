@@ -14,6 +14,7 @@ import profileRoutes from "./user/profileRoutes.js"; // Routes pour l'édition d
 import recipeUserRoutes from "./user/recipeRoutes.js"; // Routes pour les recettes de l'utilisateur (ajouter, modifier, supprimer)
 import commentUserRoutes from "./user/commentRoutes.js"; // Routes pour les commentaires de l'utilisateur (ajouter, supprimer)
 import ratingRoutes from "./user/ratingRoutes.js"; // Routes pour la gestion des évaluations (notes) des recettes
+import favoriteRoutes from "./user/favoriteRoutes.js";
 
 // 📊 Admin
 import recipeAdminRoutes from "./admin/recipeRoutes.js"; // Routes pour la gestion des recettes par l'admin
@@ -52,6 +53,7 @@ router.use((req, res, next) => {
 router.use(recipeUserRoutes); // Routes pour la gestion des recettes des utilisateurs
 router.use("/comments", commentUserRoutes); // Routes pour la gestion des commentaires des utilisateurs
 router.use("/ratings", ratingRoutes); // Routes pour les évaluations des recettes
+router.use("/favorites", favoriteRoutes);
 
 // ==================
 // 📊 ADMIN
