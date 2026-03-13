@@ -42,13 +42,16 @@ router.use(recipeRoutes); // Routes pour les recettes visibles au public
 // ==================
 router.use(authRoutes); // Routes d'authentification (connexion, inscription)
 router.use(profileRoutes); // Routes pour gérer les profils utilisateurs
-
+router.use((req, res, next) => {
+    console.log("Route reçue:", req.method, req.url);
+    next();
+});
 // ==================
 // 📦 MÉTIER (Utilisateur)
 // ==================
 router.use(recipeUserRoutes); // Routes pour la gestion des recettes des utilisateurs
 router.use("/comments", commentUserRoutes); // Routes pour la gestion des commentaires des utilisateurs
-router.use(ratingRoutes); // Routes pour les évaluations des recettes
+router.use("/ratings", ratingRoutes); // Routes pour les évaluations des recettes
 
 // ==================
 // 📊 ADMIN

@@ -70,6 +70,10 @@ app.use(globalLimiter);
 // ═══════════════════════════════════════════════════════════════
 
 app.use(sessionMiddleware);
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 // ═══════════════════════════════════════════════════════════════
 // FLASH & CONTEXTE UTILISATEUR
@@ -93,7 +97,10 @@ app.set("layout extractStyles", true);
 // ═══════════════════════════════════════════════════════════════
 // ROUTES
 // ═══════════════════════════════════════════════════════════════
-
+app.use((req, res, next) => {
+    console.log("APP reçu:", req.method, req.url);
+    next();
+});
 app.use("/", routes);
 
 // ═══════════════════════════════════════════════════════════════

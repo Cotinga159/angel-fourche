@@ -35,19 +35,20 @@ class CommentRepository {
     static async findByRecipeId(recipeId) {
     const query = /*sql*/ `
     SELECT
-        id_comment,
-        user_id,
-        recipe_id,
-        content,
-        created_at
-    FROM comments
-    WHERE recipe_id = $1
-    ORDER BY created_at DESC
+        c.id_comment,
+        c.user_id,
+        c.recipe_id,
+        c.content,
+        c.created_at,
+        u.name_user
+    FROM comments c
+    JOIN users u ON c.user_id = u.id_user
+    WHERE c.recipe_id = $1
+    ORDER BY c.created_at DESC
     `;
-
     const { rows } = await db.query(query, [recipeId]);
     return rows.map((row) => new Comment(row));
-    }
+}
     /**
    * Compte les commentaires d’une recette
    *

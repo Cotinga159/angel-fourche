@@ -29,13 +29,10 @@ class AuthController {
    * Traite l'inscription
    */
     async handleRegister(req, res) {
-         console.log(">>> handleRegister appelé", req.body);
+
     try {
         await AuthService.register(req.body);
-        // console.log("🔥 REGISTER HIT", req.body);
-   
-    console.log("CSRF cookie:", req.cookies.csrf);
-    console.log("BODY reçu :", req.body);
+
         req.flash("success", "Compte créé avec succès ✅");
         res.redirect("/auth/login");
     } catch (error) {
@@ -64,17 +61,17 @@ class AuthController {
     async handleLogin(req, res) {
     try {
         const user = await AuthService.login(req.body);
-
         req.session.userId = user.id;
+        req.session.email = user.email;
+        req.session.pseudo = user.pseudo;
+        req.session.roleName = user.role;
         req.flash("success", `Bienvenue ${user.pseudo} 👋`);
-
         res.redirect("/recipes");
     } catch (error) {
         req.flash("error", error.message);
         res.redirect("/auth/login");
     }
-    }
-
+}
     /**
    * Déconnexion
    */

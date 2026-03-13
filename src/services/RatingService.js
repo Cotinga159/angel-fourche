@@ -16,6 +16,7 @@ class RatingService {
         return RatingRepository.create({ userId, recipeId, score });
     }
 
+
     // Mettre à jour une note existante
     static async update(ratingId, score) {
         if (score < 1 || score > 5) {

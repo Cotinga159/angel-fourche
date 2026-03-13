@@ -9,6 +9,7 @@ class Comment {
         this.recipeId = data.recipe_id;
         this.content = data.content;
         this.createdAt = data.created_at;
+        this.nameUser = data.name_user || null;
 
         // Relations optionnelles si JOIN effectué
         if (data.user_pseudo) {

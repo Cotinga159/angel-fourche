@@ -18,14 +18,14 @@ class CommentController {
         return res.redirect("/auth/login");
         }
 
-        await CommentService.addComment({ userId, recipeId, content });
+        await CommentService.addComment( userId, recipeId, content );
 
         req.flash("success", "Commentaire ajouté");
         res.redirect(`/recipes/${recipeId}`);
 
     } catch (error) {
         req.flash("error", error.message);
-        res.redirect("back");
+        res.redirect(`/recipes/${recipeId}`);
     }
     }
 
@@ -34,17 +34,18 @@ class CommentController {
    */
     async delete(req, res) {
     try {
-        const { id } = req.params;
+        const { commentId } = req.params;
+        const recipeId = req.body.recipeId;
         const userId = req.session.userId;
 
-        await CommentService.deleteComment(id, userId);
+        await CommentService.deleteComment(commentId, userId);
 
         req.flash("success", "Commentaire supprimé");
-        res.redirect("back");
+        res.redirect(`/recipes/${recipeId}`);
 
     } catch (error) {
         req.flash("error", error.message);
-        res.redirect("back");
+        res.redirect("/recipes");
     }
     }
 }

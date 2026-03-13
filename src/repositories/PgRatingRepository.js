@@ -49,6 +49,23 @@ class RatingRepository {
     return new Rating(rows[0]);
 }
 
+static async update(id, score) {
+    console.log("UPDATE rating - id:", id, "score:", score);
+    const query = /*sql*/ `
+    UPDATE ratings
+    SET score = $1
+    WHERE id_rating = $2
+    RETURNING id_rating, user_id, recipe_id, score, created_at
+    `;
+    try {
+        const { rows } = await db.query(query, [score, id]);
+        console.log("UPDATE result:", rows[0]);
+        return rows[0] ? new Rating(rows[0]) : null;
+    } catch (err) {
+        console.error("UPDATE error:", err.message);
+        throw err;
+    }
+}
 // Trouve la note d’un utilisateur pour une recette
 
 static async findByUserAndRecipe(userId, recipeId) {

@@ -54,6 +54,10 @@ this.step = Array.isArray(data.step)
         if (data.author_name) {
             this.author = { id: data.id_user, name: data.author_name, email: data.author_email, };
         }
+
+        if (data.average_rating !== undefined) {
+    this.averageRating = data.average_rating ? parseFloat(data.average_rating) : 0;
+}
     }
 
     static fromDatabase(row) {

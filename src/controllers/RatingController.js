@@ -1,6 +1,7 @@
 "use strict";
 
 import RatingService from "../services/RatingService.js";
+import RatingRepository from "../repositories/PgRatingRepository.js";
 
 class RatingController {
 
@@ -11,18 +12,26 @@ class RatingController {
     try {
         const userId = req.session.userId;
         const recipeId = req.params.recipeId;
-        const { value } = req.body;
+        const value = parseInt(req.body.value);
 
-        await RatingService.rateRecipe(userId, recipeId, value);
+        const existing = await RatingRepository.findByUserAndRecipe(userId, recipeId);
+console.log("existing:", existing);
+        console.log("value:", value);
+        if (existing) {
+            console.log("UPDATE avec id:", existing.id);
+            await RatingService.update(existing.id, value);
+        } else {
+            console.log("CREATE");
+            await RatingService.add(userId, recipeId, value);
+        }
 
         req.flash("success", "Note enregistrée ⭐");
         res.redirect(`/recipes/${recipeId}`);
-
     } catch (error) {
         req.flash("error", error.message);
         res.redirect(`/recipes/${req.params.recipeId}`);
     }
-    }
+}
 
     /**
    * Supprimer une note

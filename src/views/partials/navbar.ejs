@@ -1,6 +1,16 @@
 <ul>
     <li><a href="/">Accueil</a></li>
     <li><a href="/recipes">Recette</a></li>
-    <li><a href="/auth/login">Connectez-vous</a></li>
-    <li><a href="/auth/register">Inscrivez-vous</a></li>
+    <% if (!locals.currentUser) { %>
+    <li><a href="/auth/register">S'inscrire</a></li>
+    <% } %>
+    <% if (locals.currentUser) { %>
+    <li>
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Se déconnecter</button>
+        </form>
+    </li>
+<% } else { %>
+    <li><a href="/auth/login">Se connecter</a></li>
+<% } %>
 </ul>

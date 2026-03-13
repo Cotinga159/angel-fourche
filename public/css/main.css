@@ -1,5 +1,6 @@
 .star {
     font-size: 30px;
+    line-height: 1;
 }
 
 .star.full {
@@ -9,4 +10,9 @@
 
 .star.empty {
     color: grey;      
+}
+.star-input {
+        display: inline-flex;
+    user-select: none;
+    cursor: pointer;
 }

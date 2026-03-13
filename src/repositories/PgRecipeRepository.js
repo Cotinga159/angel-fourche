@@ -10,25 +10,29 @@ class RecipeRepository {
         const query = /*sql*/ `
         SELECT
             id_recipe,
-            user_id,
-            category_id,
-            title,
-            description,
-            ingredient,
-            step,
-            preparation_time,
-            serving,
-            difficulty,
-            picture,
-            type_diet,
-            diet_religious,
-            type_flavor,
-            created_at,
-            updated_at
-        FROM recipes
+        user_id,
+        category_id,
+        title,
+        description,
+        ingredient,
+        step,
+        preparation_time,
+        serving,
+        difficulty,
+        picture,
+        type_diet,
+        diet_religious,
+        type_flavor,
+        created_at,
+        updated_at,
+        category_name,
+        user_pseudo,
+        average_rating,
+        ratings_count,
+        comments_count
+        FROM v_recipes_complete
         WHERE id_recipe = $1;
         `;
-
         const { rows } = await db.query(query, [id]);
         if (!rows[0]) return null;
     rows[0].step = Array.isArray(rows[0].step) ? rows[0].step : [];
