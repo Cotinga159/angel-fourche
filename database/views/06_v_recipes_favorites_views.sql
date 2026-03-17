@@ -7,6 +7,7 @@ SELECT
     u.name_user,
     r.id_recipe,
     r.title,
+    r.picture,
     r.type_flavor,
     r.difficulty
 FROM favorites f

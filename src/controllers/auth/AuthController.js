@@ -61,11 +61,12 @@ class AuthController {
     async handleLogin(req, res) {
     try {
         const user = await AuthService.login(req.body);
+        console.log("USER login:", user);
         req.session.userId = user.id;
         req.session.email = user.email;
-        req.session.pseudo = user.pseudo;
+        req.session.nameUser = user.nameUser;
         req.session.roleName = user.role;
-        req.flash("success", `Bienvenue ${user.pseudo} 👋`);
+        req.flash("success", `Bienvenue ${user.nameUser} 👋`);
         res.redirect("/recipes");
     } catch (error) {
         req.flash("error", error.message);

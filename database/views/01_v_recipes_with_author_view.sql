@@ -9,6 +9,7 @@ SELECT
     r.difficulty,
     r.type_flavor,
     r.type_diet,
+    r.picture,
     r.diet_religious,
     r.created_at,
     u.id_user,

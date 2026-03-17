@@ -229,6 +229,410 @@ INSERT INTO recipes (
     'vegan',
     'aucun',
     'salé'
-);
+),
 
+-- Tiramisu
+(
+    'f3a4b5c6-d7e8-9012-cdef-123456781013',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Tiramisu Classique',
+    'Le tiramisu est un dessert italien irrésistible, avec ses couches de biscuits imbibés de café et sa crème mascarpone légère et onctueuse. Saupoudré de cacao, il est à la fois élégant et gourmand. Un dessert qui fait toujours l''unanimité.',
+    '[
+        {"quantity":500,"unit":"g","name":"mascarpone"},
+        {"quantity":4,"unit":"unit","name":"œufs"},
+        {"quantity":100,"unit":"g","name":"sucre"},
+        {"quantity":24,"unit":"unit","name":"biscuits à la cuillère"},
+        {"quantity":300,"unit":"ml","name":"café fort refroidi"},
+        {"quantity":3,"unit":"tbsp","name":"marsala ou amaretto"},
+        {"quantity":30,"unit":"g","name":"cacao en poudre non sucré"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Séparez les blancs des jaunes d''œufs."},
+        {"step_number": 2, "instruction": "Fouettez les jaunes avec le sucre jusqu''à blanchiment, puis incorporez le mascarpone."},
+        {"step_number": 3, "instruction": "Montez les blancs en neige ferme et incorporez-les délicatement à la crème mascarpone."},
+        {"step_number": 4, "instruction": "Mélangez le café refroidi avec le marsala dans un bol peu profond."},
+        {"step_number": 5, "instruction": "Trempez rapidement les biscuits dans le café et disposez-les en couche dans un plat."},
+        {"step_number": 6, "instruction": "Étalez la moitié de la crème mascarpone sur les biscuits."},
+        {"step_number": 7, "instruction": "Répétez l''opération avec une deuxième couche de biscuits et de crème."},
+        {"step_number": 8, "instruction": "Saupoudrez de cacao et réfrigérez au moins 4 heures avant de servir."}
+    ]'::jsonb,
+    '30', '6', 'Moyen',
+    'https://images.ctfassets.net/1p5r6txvlxu4/2AuCQgVaK08nA3Wgm7TJbr/7981b99d4a52359fe5dd1090dd2ec96a/Tiramisu_original.jpg?w=768&h=541&fm=webp&q=100&fit=fill&f=center',
+    'végétarien', 'aucun', 'sucre'
+),
 
+-- Fondant au Chocolat
+(
+    'f5a6b7c8-d9e0-1234-efab-375678901235',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Fondant au Chocolat',
+    'Le fondant au chocolat est LE dessert des amateurs de chocolat. Avec son cœur coulant et sa croûte légèrement craquante, il est irrésistible. Simple et rapide à préparer, il impressionnera vos convives à coup sûr.',
+    '[
+        {"quantity":200,"unit":"g","name":"chocolat noir 70%"},
+        {"quantity":150,"unit":"g","name":"beurre"},
+        {"quantity":150,"unit":"g","name":"sucre"},
+        {"quantity":4,"unit":"unit","name":"œufs"},
+        {"quantity":50,"unit":"g","name":"farine"},
+        {"quantity":1,"unit":"pinch","name":"sel"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Préchauffez le four à 200°C et beurrez des ramequins."},
+        {"step_number": 2, "instruction": "Faites fondre le chocolat et le beurre au bain-marie."},
+        {"step_number": 3, "instruction": "Fouettez les œufs avec le sucre jusqu''à blanchiment."},
+        {"step_number": 4, "instruction": "Incorporez le chocolat fondu au mélange œufs-sucre."},
+        {"step_number": 5, "instruction": "Ajoutez la farine tamisée et le sel, mélangez délicatement."},
+        {"step_number": 6, "instruction": "Versez la préparation dans les ramequins beurrés."},
+        {"step_number": 7, "instruction": "Enfournez 10-12 minutes — le centre doit rester légèrement tremblant."},
+        {"step_number": 8, "instruction": "Démoulez immédiatement et servez avec une boule de glace vanille."}
+    ]'::jsonb,
+    '20', '4', 'Moyen',
+    'https://perleensucre.com/wp-content/uploads/2019/10/Coeur-coulant-2-2.jpg',
+    'végétarien', 'aucun', 'sucre'
+),
+
+-- Tacos al Pastor (Mexicain)
+(
+    'f1a2b3c4-d5e6-7890-abcd-ef1234567891',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Tacos al Pastor',
+    'Les tacos al pastor sont un symbole de la street food mexicaine. La viande de porc marinée aux épices et aux ananas, cuite lentement, se glisse dans des tortillas chaudes garnies de coriandre et d''oignon. Un explosion de saveurs fumées et acidulées.',
+    '[
+        {"quantity":800,"unit":"g","name":"porc (épaule)"},
+        {"quantity":3,"unit":"unit","name":"piments guajillo séchés"},
+        {"quantity":1,"unit":"unit","name":"ananas"},
+        {"quantity":3,"unit":"unit","name":"gousses d''ail"},
+        {"quantity":1,"unit":"tsp","name":"cumin"},
+        {"quantity":1,"unit":"tsp","name":"origan"},
+        {"quantity":2,"unit":"tbsp","name":"vinaigre blanc"},
+        {"quantity":12,"unit":"unit","name":"tortillas de maïs"},
+        {"quantity":1,"unit":"unit","name":"oignon blanc"},
+        {"quantity":1,"unit":"unit","name":"bouquet de coriandre"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Réhydratez les piments guajillo 20 minutes dans de l''eau chaude."},
+        {"step_number": 2, "instruction": "Mixez les piments avec l''ail, le cumin, l''origan, le vinaigre et du jus d''ananas."},
+        {"step_number": 3, "instruction": "Coupez le porc en tranches fines et faites mariner 4 heures dans la sauce."},
+        {"step_number": 4, "instruction": "Faites cuire le porc dans une poêle bien chaude en plusieurs fois."},
+        {"step_number": 5, "instruction": "Ajoutez des dés d''ananas en fin de cuisson et laissez caraméliser 2 minutes."},
+        {"step_number": 6, "instruction": "Chauffez les tortillas dans une poêle sèche."},
+        {"step_number": 7, "instruction": "Garnissez chaque tortilla de viande, d''oignon émincé et de coriandre fraîche."},
+        {"step_number": 8, "instruction": "Servez avec des quartiers de citron vert."}
+    ]'::jsonb,
+    '45', '4', 'Moyen',
+    'https://kudocook.com/wp-content/uploads/2025/03/67d6c75b01211.jpg',
+    'omnivore', 'aucun', 'salé'
+),
+-- Ramen (Japonais)
+(
+    'f2a3b4c5-d6e7-8901-bcde-f12345678902',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Ramen Tonkotsu',
+    'Le ramen tonkotsu est un incontournable de la cuisine japonaise. Son bouillon crémeux et riche, obtenu après des heures de cuisson d''os de porc, est une véritable ode à la patience et au savoir-faire. Servi avec des nouilles, un œuf mollet et du porc fondant.',
+    '[
+        {"quantity":400,"unit":"g","name":"nouilles ramen"},
+        {"quantity":500,"unit":"g","name":"poitrine de porc"},
+        {"quantity":2,"unit":"unit","name":"œufs"},
+        {"quantity":4,"unit":"tbsp","name":"sauce soja"},
+        {"quantity":2,"unit":"tbsp","name":"mirin"},
+        {"quantity":1,"unit":"L","name":"bouillon de porc"},
+        {"quantity":4,"unit":"unit","name":"feuilles de nori"},
+        {"quantity":2,"unit":"unit","name":"oignons verts"},
+        {"quantity":100,"unit":"g","name":"pousses de bambou"},
+        {"quantity":2,"unit":"tbsp","name":"pâte de sésame"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Faites mariner la poitrine de porc dans la sauce soja et le mirin 2 heures."},
+        {"step_number": 2, "instruction": "Roulez la poitrine en cylindre, ficelez-la et faites-la cuire 2 heures dans le bouillon."},
+        {"step_number": 3, "instruction": "Faites cuire les œufs 6 minutes pour un cœur mollet, puis faites-les mariner dans la sauce soja."},
+        {"step_number": 4, "instruction": "Chauffez le bouillon, ajoutez la pâte de sésame et rectifiez l''assaisonnement."},
+        {"step_number": 5, "instruction": "Faites cuire les nouilles selon les instructions du paquet."},
+        {"step_number": 6, "instruction": "Coupez le porc en tranches épaisses."},
+        {"step_number": 7, "instruction": "Répartissez les nouilles dans des bols, versez le bouillon chaud."},
+        {"step_number": 8, "instruction": "Garnissez de tranches de porc, d''un demi-œuf, de nori, de bambou et d''oignons verts."}
+    ]'::jsonb,
+    '180', '4', 'Difficile',
+    'https://i0.wp.com/christinapotvin.com/wp-content/uploads/2021/09/miniature-youtube-2.jpg?resize=1080%2C675&ssl=1',
+    'omnivore', 'aucun', 'salé'
+),
+-- Butter Chicken (Indien)
+(
+    'f3a4b5c6-d7e8-9012-cdef-123456789013',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Butter Chicken',
+    'Le butter chicken, ou murgh makhani, est l''un des plats indiens les plus appréciés dans le monde. Le poulet tendre mariné au yaourt et aux épices mijote dans une sauce tomate crémeuse et parfumée au beurre. Un plat savoureux et réconfortant.',
+    '[
+        {"quantity":800,"unit":"g","name":"poulet (cuisses désossées)"},
+        {"quantity":200,"unit":"ml","name":"yaourt nature"},
+        {"quantity":2,"unit":"tsp","name":"garam masala"},
+        {"quantity":2,"unit":"tsp","name":"curcuma"},
+        {"quantity":400,"unit":"g","name":"tomates concassées"},
+        {"quantity":200,"unit":"ml","name":"crème fraîche"},
+        {"quantity":50,"unit":"g","name":"beurre"},
+        {"quantity":3,"unit":"unit","name":"gousses d''ail"},
+        {"quantity":2,"unit":"tsp","name":"gingembre frais râpé"},
+        {"quantity":1,"unit":"tsp","name":"piment de Cayenne"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Mélangez le yaourt avec la moitié des épices, l''ail et le gingembre. Faites mariner le poulet 2 heures."},
+        {"step_number": 2, "instruction": "Faites griller le poulet au four à 220°C pendant 20 minutes."},
+        {"step_number": 3, "instruction": "Dans une casserole, faites fondre le beurre et faites revenir l''ail et le gingembre restants."},
+        {"step_number": 4, "instruction": "Ajoutez les tomates concassées et le reste des épices, laissez mijoter 15 minutes."},
+        {"step_number": 5, "instruction": "Mixez la sauce pour la rendre lisse et crémeuse."},
+        {"step_number": 6, "instruction": "Incorporez la crème fraîche et faites chauffer à feu doux."},
+        {"step_number": 7, "instruction": "Ajoutez le poulet grillé dans la sauce et laissez mijoter 10 minutes."},
+        {"step_number": 8, "instruction": "Servez avec du riz basmati et du naan."}
+    ]'::jsonb,
+    '50', '4', 'Moyen',
+    'https://sugarspunrun.com/wp-content/uploads/2025/04/Butter-chicken-1-of-1.jpg',
+    'omnivore', 'aucun', 'salé'
+),
+-- Cazuela (Chilien)
+(
+    'f4a5b6c7-d8e9-0123-defa-234567890124',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Cazuela Chilienne',
+    'La cazuela est le plat réconfortant par excellence au Chili. Ce ragoût généreux mêle viande de bœuf, légumes et épices dans un bouillon savoureux. Servi dans un grand bol fumant, il rassemble toute la famille autour de la table.',
+    '[
+        {"quantity":800,"unit":"g","name":"bœuf à braiser"},
+        {"quantity":4,"unit":"unit","name":"pommes de terre"},
+        {"quantity":2,"unit":"unit","name":"carottes"},
+        {"quantity":1,"unit":"unit","name":"épi de maïs"},
+        {"quantity":200,"unit":"g","name":"potiron"},
+        {"quantity":1,"unit":"unit","name":"oignon"},
+        {"quantity":3,"unit":"unit","name":"gousses d''ail"},
+        {"quantity":1,"unit":"tsp","name":"cumin"},
+        {"quantity":1,"unit":"tsp","name":"paprika"},
+        {"quantity":1,"unit":"unit","name":"bouquet de coriandre"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Coupez le bœuf en gros morceaux et faites-les dorer dans une grande marmite."},
+        {"step_number": 2, "instruction": "Ajoutez l''oignon émincé et l''ail, faites revenir 3 minutes."},
+        {"step_number": 3, "instruction": "Ajoutez le cumin, le paprika, salez et poivrez."},
+        {"step_number": 4, "instruction": "Couvrez d''eau à hauteur et laissez mijoter 1 heure."},
+        {"step_number": 5, "instruction": "Ajoutez les carottes en rondelles, le potiron en cubes et l''épi de maïs coupé en tronçons."},
+        {"step_number": 6, "instruction": "Ajoutez les pommes de terre pelées entières 30 minutes plus tard."},
+        {"step_number": 7, "instruction": "Laissez mijoter encore 30 minutes jusqu''à ce que tous les légumes soient tendres."},
+        {"step_number": 8, "instruction": "Servez dans de grands bols avec de la coriandre fraîche ciselée."}
+    ]'::jsonb,
+    '120', '4', 'Facile',
+    'https://www.youtotallygotthis.com/wp-content/uploads/2017/05/Cazuela-Feature-Image.jpg',
+    'omnivore', 'aucun', 'salé'
+),
+-- Couscous Tunisien
+(
+    'f5a6b7c8-d9e0-1234-efab-345678901235',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Couscous Tunisien',
+    'Le couscous tunisien se distingue par sa sauce rouge épicée et parfumée au harissa. La semoule fine et légère absorbe un bouillon généreux enrichi de légumes et d''agneau fondant. Un plat festif et convivial qui réunit toute la famille.',
+    '[
+        {"quantity":500,"unit":"g","name":"semoule fine"},
+        {"quantity":600,"unit":"g","name":"agneau (épaule)"},
+        {"quantity":2,"unit":"unit","name":"carottes"},
+        {"quantity":2,"unit":"unit","name":"courgettes"},
+        {"quantity":200,"unit":"g","name":"pois chiches cuits"},
+        {"quantity":2,"unit":"tbsp","name":"harissa"},
+        {"quantity":2,"unit":"tbsp","name":"concentré de tomate"},
+        {"quantity":1,"unit":"tsp","name":"cumin"},
+        {"quantity":1,"unit":"tsp","name":"coriandre moulue"},
+        {"quantity":3,"unit":"tbsp","name":"huile d''olive"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Faites dorer les morceaux d''agneau dans l''huile d''olive."},
+        {"step_number": 2, "instruction": "Ajoutez le concentré de tomate, la harissa, le cumin et la coriandre."},
+        {"step_number": 3, "instruction": "Couvrez d''eau et laissez mijoter 45 minutes."},
+        {"step_number": 4, "instruction": "Ajoutez les carottes en tronçons et poursuivez 15 minutes."},
+        {"step_number": 5, "instruction": "Ajoutez les courgettes en rondelles et les pois chiches, cuisez encore 15 minutes."},
+        {"step_number": 6, "instruction": "Préparez la semoule en versant du bouillon chaud dessus, couvrez 5 minutes."},
+        {"step_number": 7, "instruction": "Égrainez la semoule à la fourchette avec un peu d''huile d''olive."},
+        {"step_number": 8, "instruction": "Servez la semoule dans un grand plat avec la viande, les légumes et le bouillon à part."}
+    ]'::jsonb,
+    '90', '6', 'Moyen',
+    'https://www.lequotidien.com.tn/images/2021/08/couscous_agneau.jpg',
+    'omnivore', 'halal', 'salé'
+),
+-- Romazava (Madagascar)
+(
+    'f6a7b8c9-d0e1-2345-fabc-456789012346',
+    '830a9585-0f66-4d6e-9023-d1151343471d',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Romazava Malgache',
+    'Le romazava est le plat national de Madagascar. Ce bouillon parfumé à base de viande de bœuf et de brèdes — feuilles de légumes locaux — est simple mais profondément savoureux. Servi avec du riz blanc, il incarne toute la générosité de la cuisine malgache.',
+    '[
+        {"quantity":600,"unit":"g","name":"bœuf (paleron)"},
+        {"quantity":200,"unit":"g","name":"brèdes mafana (ou épinards)"},
+        {"quantity":200,"unit":"g","name":"brèdes morelle (ou blettes)"},
+        {"quantity":2,"unit":"unit","name":"tomates"},
+        {"quantity":1,"unit":"unit","name":"oignon"},
+        {"quantity":3,"unit":"unit","name":"gousses d''ail"},
+        {"quantity":1,"unit":"tsp","name":"gingembre frais râpé"},
+        {"quantity":2,"unit":"tbsp","name":"huile neutre"},
+        {"quantity":1,"unit":"tsp","name":"sel"},
+        {"quantity":400,"unit":"g","name":"riz blanc"}
+    ]'::jsonb,
+    '[
+        {"step_number": 1, "instruction": "Coupez le bœuf en cubes et faites-le dorer dans l''huile chaude."},
+        {"step_number": 2, "instruction": "Ajoutez l''oignon émincé, l''ail et le gingembre, faites revenir 3 minutes."},
+        {"step_number": 3, "instruction": "Ajoutez les tomates coupées en dés et laissez compoter 5 minutes."},
+        {"step_number": 4, "instruction": "Couvrez d''eau à hauteur et laissez mijoter 1 heure à feu doux."},
+        {"step_number": 5, "instruction": "Ajoutez les brèdes mafana et laissez cuire 10 minutes."},
+        {"step_number": 6, "instruction": "Ajoutez les brèdes morelle et poursuivez 5 minutes."},
+        {"step_number": 7, "instruction": "Rectifiez l''assaisonnement en sel."},
+        {"step_number": 8, "instruction": "Servez le romazava dans des bols avec du riz blanc cuit à part."}
+    ]'::jsonb,
+    '80', '4', 'Facile',
+    'https://t4.ftcdn.net/jpg/15/92/02/43/360_F_1592024342_14MBaAyuuFtuvyBXQIcThb2or4wlMf0v.jpg',
+    'omnivore', 'aucun', 'salé'
+),
+-- Boeuf Wellington
+(
+    'f1a2b3c4-e111-4c6c-b165-d1d83e85c111',
+    'cbaacdb3-0798-4235-9272-733e22615f2e',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Boeuf Wellington',
+    'Un grand classique de la cuisine gastronomique avec une cuisson précise et un montage délicat.',
+    '[
+        {"quantity":500,"unit":"g","name":"filet de boeuf"},
+        {"quantity":250,"unit":"g","name":"champignons"},
+        {"quantity":1,"unit":"unit","name":"pâte feuilletée"},
+        {"quantity":6,"unit":"slice","name":"jambon cru"},
+        {"quantity":1,"unit":"unit","name":"oeuf"},
+        {"quantity":1,"unit":"tbsp","name":"moutarde"}
+    ]'::jsonb,
+    '[
+        {"step_number":1,"instruction":"Saisir le filet de boeuf sur toutes ses faces."},
+        {"step_number":2,"instruction":"Préparer une duxelles de champignons."},
+        {"step_number":3,"instruction":"Enrouler le boeuf avec le jambon et la duxelles."},
+        {"step_number":4,"instruction":"Envelopper dans la pâte feuilletée."},
+        {"step_number":5,"instruction":"Dorer à l’oeuf et cuire au four à 200°C pendant 25 minutes."}
+    ]'::jsonb,
+    '90',
+    '4',
+    'Difficile',
+    'https://www.toutesrecettes.net/wp-content/uploads/2019/12/Boeuf-Wellington-et-ses-pommes-de-terre-roties.jpg',
+    'omnivore',
+    'aucun',
+    'salé'
+),
+-- Macarons à la framboise
+(
+    'f1a2b3c4-e222-4c6c-b165-d1d83e85c222',
+    'd31e431c-6f6e-4cc6-861b-6d9095ed5e4e',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Macarons à la framboise',
+    'Une pâtisserie française délicate nécessitant précision et technique.',
+    '[
+        {"quantity":100,"unit":"g","name":"poudre d’amandes"},
+        {"quantity":100,"unit":"g","name":"sucre glace"},
+        {"quantity":80,"unit":"g","name":"blancs d’oeufs"},
+        {"quantity":100,"unit":"g","name":"sucre"},
+        {"quantity":150,"unit":"g","name":"framboises"}
+    ]'::jsonb,
+    '[
+        {"step_number":1,"instruction":"Tamisez la poudre d’amandes et le sucre glace."},
+        {"step_number":2,"instruction":"Montez les blancs en neige avec le sucre."},
+        {"step_number":3,"instruction":"Macaronnez délicatement la préparation."},
+        {"step_number":4,"instruction":"Dressez les coques et laissez croûter 30 minutes."},
+        {"step_number":5,"instruction":"Cuire à 150°C pendant 12 minutes."},
+        {"step_number":6,"instruction":"Garnir avec une ganache à la framboise."}
+    ]'::jsonb,
+    '120',
+    '6',
+    'Difficile',
+    'https://assets.afcdn.com/recipe/20160502/16428_w1024h1024c1cx2000cy3000.webp',
+    'végétarien',
+    'aucun',
+    'sucre'
+),
+-- Poulet Curry
+(
+    'a1b2c3d4-e444-4c6c-b165-d1d83e85b444',
+    'db937cac-d99d-4b0d-bd4b-6e23438589ba',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Poulet au Curry',
+    'Un plat parfumé et épicé qui apporte une touche exotique à votre table.',
+    '[
+        {"quantity":200,"unit":"g","name":"poulet"},
+        {"quantity":1,"unit":"unit","name":"oignon"},
+        {"quantity":200,"unit":"ml","name":"lait de coco"},
+        {"quantity":1,"unit":"tbsp","name":"curry"},
+        {"quantity":1,"unit":"tbsp","name":"huile"}
+    ]'::jsonb,
+    '[
+        {"step_number":1,"instruction":"Faites revenir l’oignon émincé dans l’huile."},
+        {"step_number":2,"instruction":"Ajoutez le poulet et faites dorer."},
+        {"step_number":3,"instruction":"Ajoutez le curry et mélangez."},
+        {"step_number":4,"instruction":"Versez le lait de coco et laissez mijoter 15 minutes."}
+    ]'::jsonb,
+    '30',
+    '3',
+    'Moyen',
+    'https://img.cuisineaz.com/1200x675/2013/12/20/i33528-riz-au-curry.jpg',
+    'omnivore',
+    'halal',
+    'salé'
+),
+-- Soufflé au fromage
+(
+    'f1a2b3c4-e444-4c6c-b165-d1d83e85c444',
+    'db937cac-d99d-4b0d-bd4b-6e23438589ba',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Soufflé au fromage',
+    'Une recette technique qui demande précision pour obtenir une texture aérienne parfaite.',
+    '[
+        {"quantity":50,"unit":"g","name":"beurre"},
+        {"quantity":50,"unit":"g","name":"farine"},
+        {"quantity":300,"unit":"ml","name":"lait"},
+        {"quantity":100,"unit":"g","name":"fromage râpé"},
+        {"quantity":4,"unit":"unit","name":"oeufs"}
+    ]'::jsonb,
+    '[
+        {"step_number":1,"instruction":"Préparer une béchamel."},
+        {"step_number":2,"instruction":"Ajouter le fromage et les jaunes d’oeufs."},
+        {"step_number":3,"instruction":"Monter les blancs en neige."},
+        {"step_number":4,"instruction":"Incorporer délicatement les blancs."},
+        {"step_number":5,"instruction":"Cuire immédiatement au four sans ouvrir la porte."}
+    ]'::jsonb,
+    '60',
+    '4',
+    'Difficile',
+    'https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/9954ddb7-2537-45de-bf1b-077db5c2d0a9/Derivates/e763096b-b55b-4b2f-916f-fea24d635e0d.jpg',
+    'végétarien',
+    'aucun',
+    'salé'
+),
+-- Pasta Carbonara
+(
+    'a1b2c3d4-e111-4c6c-b165-d1d83e85b111',
+    'cbaacdb3-0798-4235-9272-733e22615f2e',
+    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'Pâtes Carbonara',
+    'Un grand classique italien crémeux et savoureux, parfait pour un repas rapide et réconfortant.',
+    '[
+        {"quantity":200,"unit":"g","name":"spaghetti"},
+        {"quantity":100,"unit":"g","name":"lardons"},
+        {"quantity":2,"unit":"unit","name":"oeufs"},
+        {"quantity":50,"unit":"g","name":"parmesan"},
+        {"quantity":1,"unit":"pinch","name":"poivre"}
+    ]'::jsonb,
+    '[
+        {"step_number":1,"instruction":"Faites cuire les pâtes dans de l’eau bouillante salée."},
+        {"step_number":2,"instruction":"Faites revenir les lardons dans une poêle."},
+        {"step_number":3,"instruction":"Mélangez les œufs et le parmesan."},
+        {"step_number":4,"instruction":"Ajoutez les pâtes aux lardons hors du feu."},
+        {"step_number":5,"instruction":"Incorporez le mélange œufs/fromage et mélangez rapidement."}
+    ]'::jsonb,
+    '20',
+    '2',
+    'Facile',
+    'https://littlespoonfarm.com/wp-content/uploads/2024/07/Pasta-Carbonara-Recipe.jpg',
+    'omnivore',
+    'aucun',
+    'salé'
+)

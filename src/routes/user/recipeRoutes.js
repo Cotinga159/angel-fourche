@@ -4,6 +4,7 @@ import { Router } from "express";
 import RecipeController from "../../controllers/RecipeController.js";
 import { requireAuth } from "../../middlewares/authMiddleware.js";
 
+
 const router = Router();
 
 /**
@@ -11,6 +12,7 @@ const router = Router();
  *
  * Création, mise à jour, suppression de recettes
  */
+
 
 /**
  * ➕ Créer une nouvelle recette
@@ -23,7 +25,11 @@ router.post("/create", requireAuth, RecipeController.create);
  * POST /recipes/:id/update
  */
 router.post("/:id/update", requireAuth, RecipeController.update);
-
+/**
+ * ✏️ Afficher le formulaire de modification
+ * GET /recipes/:id/edit
+ */
+router.get("/:id/edit", requireAuth, RecipeController.showEditForm);
 /**
  * 🗑️ Supprimer une recette
  * POST /recipes/:id/delete

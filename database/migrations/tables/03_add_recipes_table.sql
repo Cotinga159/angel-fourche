@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS recipes (
 
 -- Documentation table recipes
 COMMENT ON TABLE recipes IS 'Recettes partagées par les utilisateurs, incluant ingrédients, étapes, temps, difficulté, type de régime, régime religieux et type de saveur';
-
 COMMENT ON COLUMN recipes.id_recipe IS 'Identifiant unique de la recette (UUID v7)';
 COMMENT ON COLUMN recipes.user_id IS 'Référence vers l utilisateur auteur de la recette';
 COMMENT ON COLUMN recipes.category_id IS 'Référence vers la catégorie de la recette';

@@ -1,9 +1,22 @@
 <ul>
     <li><a href="/">Accueil</a></li>
+    <% if (locals.currentUser) { %>
+    <li><a href="/users">Profile</a></li>
+    <% } %>
     <li><a href="/recipes">Recette</a></li>
+        
+    <li>
+        <form action="/recipes/search" method="GET">
+            <input type="text" name="q" placeholder="Rechercher une recette..."
+                value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+            <button type="submit">🔍</button>
+        </form>
+    </li>
+
     <% if (!locals.currentUser) { %>
     <li><a href="/auth/register">S'inscrire</a></li>
     <% } %>
+    
     <% if (locals.currentUser) { %>
     <li>
         <form action="/auth/logout" method="POST">

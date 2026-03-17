@@ -95,7 +95,7 @@ static async findAllWithRatings() {
     static async searchByKeyword(keyword) {
         const query = /*sql*/ `
         SELECT *
-        FROM v_recipes_search_view
+        FROM v_recipes_search
         WHERE title ILIKE $1 OR description ILIKE $1
         ORDER BY created_at DESC;
         `;
@@ -145,53 +145,54 @@ static async findAllWithRatings() {
     }
 
     static async update(id, data) {
-        const query = /*sql*/ `
-        UPDATE recipes
-        SET
-            description = COALESCE($1, description),
-            ingredient = COALESCE($2, ingredient),
-            step = COALESCE($3, step),
-            difficulty = COALESCE($4, difficulty),
-            picture = COALESCE($5, picture),
-            type_diet = COALESCE($6, type_diet),
-            diet_religious = COALESCE($7, diet_religious),
-            type_flavor = COALESCE($8, type_flavor)
-        WHERE id_recipe = $9
-        RETURNING 
-            id_recipe,
-            user_id,
-            category_id,
-            title,
-            description,
-            ingredient,
-            step,
-            preparation_time,
-            serving,
-            difficulty,
-            picture,
-            type_diet,
-            diet_religious,
-            type_flavor,
-            created_at,
-            updated_at
-        `;
+    const query = /*sql*/ `
+    UPDATE recipes
+    SET
+        category_id     = COALESCE($1, category_id),
+        title           = COALESCE($2, title),
+        description     = COALESCE($3, description),
+        ingredient      = COALESCE($4, ingredient),
+        step            = COALESCE($5, step),
+        preparation_time = COALESCE($6, preparation_time),
+        serving         = COALESCE($7, serving),
+        difficulty      = COALESCE($8, difficulty),
+        picture         = COALESCE($9, picture),
+        type_diet       = COALESCE($10, type_diet),
+        diet_religious  = COALESCE($11, diet_religious),
+        type_flavor     = COALESCE($12, type_flavor),
+        updated_at      = NOW()
+    WHERE id_recipe = $13
+    RETURNING *;
+    `;
+    const values = [
+        data.categoryId      ?? null,
+        data.title           ?? null,
+        data.description     ?? null,
+        data.ingredient      ? JSON.stringify(data.ingredient) : null,
+        data.step            ? JSON.stringify(data.step) : null,
+        data.preparationTime ?? null,
+        data.serving         ?? null,
+        data.difficulty      ?? null,
+        data.picture         ?? null,
+        data.typeDiet        ?? null,
+        data.dietReligious   ?? null,
+        data.typeFlavor      ?? null,
+        id,
+    ];
 
-        const values = [
-        data.description ?? null,
-        data.ingredient ?? null,
-        data.step ?? null,
-        data.difficulty ?? null,
-        data.picture ?? null,
-        data.typeDiet ?? null,
-        data.dietReligious ?? null,
-        data.typeFlavor ?? null,
-        id, 
-        ];
-        
-                const { rows } = await db.query(query, values);
-                return rows[0] ? new Recipe(rows[0]) : null;
+    const { rows } = await db.query(query, values);
+    return rows[0] ? new Recipe(rows[0]) : null;
+}
 
-    }
+    static async delete(id) {
+    const query = /*sql*/ `
+        DELETE FROM recipes
+        WHERE id_recipe = $1
+        RETURNING id_recipe;
+    `;
+    const { rows } = await db.query(query, [id]);
+    return rows.length > 0;
+}
 }
 
 export default RecipeRepository;

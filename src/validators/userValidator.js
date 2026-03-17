@@ -39,7 +39,7 @@ export const registerSchema = z.object({
     })
     .max(100, { message: "Le mot de passe est trop long" }),
 
-    pseudo: z
+    userName: z
     .string()
     .min(3, { message: "Le pseudo est trop court" })
     .max(50, { message: "Le pseudo est trop long" })

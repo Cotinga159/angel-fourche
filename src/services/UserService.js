@@ -22,6 +22,10 @@ class UserService {
     static async deleteAccount(userId) {
         return UserRepository.delete(userId);
     }
+
+    async getProfileStats(userId) {
+    return await UserRepository.getProfileStats(userId);
+}
 }
 
 export default UserService; 

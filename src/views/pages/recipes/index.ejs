@@ -1,50 +1,137 @@
+<div id="sort-controls">
+    <fieldset>
+        <legend>Trier par note</legend>
+        <label><input type="radio" name="sort-rating" value="best"> Mieux notées</label>
+        <label><input type="radio" name="sort-rating" value="worst"> Moins bien notées</label>
+    </fieldset>
+    <fieldset>
+        <legend>Filtrer par difficulté</legend>
+        <label><input type="checkbox" name="filter-difficulty" value="Facile"> Facile</label>
+        <label><input type="checkbox" name="filter-difficulty" value="Moyen"> Moyen</label>
+        <label><input type="checkbox" name="filter-difficulty" value="Difficile"> Difficile</label>
+    </fieldset>
+    <fieldset>
+        <legend>Filtrer par goût</legend>
+        <label><input type="radio" name="sort-flavor" value="sucre"> Sucré</label>
+        <label><input type="radio" name="sort-flavor" value="salé"> Salé</label>
+        <label><input type="radio" name="sort-flavor" value="none" checked> Tous</label>
+    </fieldset>
+    <fieldset>
+    <legend>Filtrer par régime</legend>
+    <label><input type="checkbox" name="filter-diet" value="végétarien"> Végétarien</label>
+    <label><input type="checkbox" name="filter-diet" value="vegan"> Vegan</label>
+    <label><input type="checkbox" name="filter-diet" value="omnivore"> Omnivore</label>
+</fieldset>
+</div>
+
+<div id="recipes-container">
 <% recipes.forEach(recipe => { %>
-    <a href="/recipes/<%= recipe.id %>">
-        <div class="recipe-card">
-            <h2><%= recipe.title %></h2>
-
-            <p>Difficulté: <%= recipe.difficulty %></p>
-            <% if (recipe.picture) { %>
-                <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+    <div class="recipe-item" 
+        data-rating="<%= recipe.averageRating || 0 %>" 
+        data-difficulty="<%= recipe.difficulty %>" 
+        data-flavor="<%= recipe.typeFlavor %>"
+        data-diet="<%= recipe.typeDiet %>">
+        <a href="/recipes/<%= recipe.id %>">
+            <div class="recipe-card">
+                <h2><%= recipe.title %></h2>
+                <p>Difficulté: <%= recipe.difficulty %></p>
+                <% if (recipe.picture) { %>
+                    <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                <% } %>
+            </div>
+        </a>
+        <span class="stars">
+            <% for(let i = 1; i <= 5; i++) { %>
+                <% if(i <= Math.round(recipe.averageRating || 0)) { %>
+                    <span class="star full">★</span>
+                <% } else { %>
+                    <span class="star empty">☆</span>
+                <% } %>
             <% } %>
-        </div>
-    </a>
-    <span class="stars">
-    <% for(let i = 1; i <= 5; i++) { %>
-        <% if(i <= Math.round(recipe.averageRating)) { %>
-            <span class="star full">★</span>
-        <% } else { %>
-            <span class="star empty">☆</span>
+        </span>
+        <% if (user) { %>
+            <button 
+                class="favorite-btn" 
+                data-recipe-id="<%= recipe.id %>"
+                data-favorite="<%= favoriteIds.includes(recipe.id) %>">
+                <%= favoriteIds.includes(recipe.id) ? '❤️' : '🤍' %>
+            </button>
         <% } %>
-    <% } %>
-</span>
-<% if (user) { %>
-    <button 
-        class="favorite-btn" 
-        data-recipe-id="<%= recipe.id %>"
-        data-favorite="<%= favoriteIds.includes(recipe.id) %>">
-        <%= favoriteIds.includes(recipe.id) ? '❤️' : '🤍' %>
-    </button>
-<% } %>
-
+    </div>
 <% }) %>
+</div>
+
 <script>
-    document.querySelectorAll('.favorite-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const recipeId = btn.dataset.recipeId;
-            
-            try {
-                await fetch(`/favorites/${recipeId}`, { 
-    method: 'POST',
-    headers: { 'Accept': 'application/json' }
-});
-                
-                const isFav = btn.dataset.favorite === 'true';
-                btn.dataset.favorite = String(!isFav);
-                btn.textContent = !isFav ? '❤️' : '🤍';
-            } catch (err) {
-                console.error('Erreur favori:', err);
-            }
-        });
+const difficultyOrder = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
+
+function sortRecipes() {
+    const container = document.getElementById('recipes-container');
+    const items = [...container.querySelectorAll('.recipe-item')];
+
+    const ratingSort = document.querySelector('input[name="sort-rating"]:checked')?.value || 'none';
+    const flavorSort = document.querySelector('input[name="sort-flavor"]:checked').value;
+    const selectedDifficulties = [...document.querySelectorAll('input[name="filter-difficulty"]:checked')]
+        .map(cb => cb.value);
+    const selectedDiets = [...document.querySelectorAll('input[name="filter-diet"]:checked')]
+    .map(cb => cb.value);
+
+    // Afficher/cacher selon les filtres
+    items.forEach(item => {
+        const flavorMatch = flavorSort === 'none' || item.dataset.flavor === flavorSort;
+        const difficultyMatch = selectedDifficulties.length === 0 || selectedDifficulties.includes(item.dataset.difficulty);
+        const dietMatch = selectedDiets.length === 0 || selectedDiets.includes(item.dataset.diet);
+        item.style.display = flavorMatch && difficultyMatch && dietMatch ? '' : 'none';
     });
+
+    // Trier les items visibles
+    const visibleItems = items.filter(item => item.style.display !== 'none');
+    visibleItems.sort((a, b) => {
+        if (ratingSort !== 'none') {
+            const ra = parseFloat(a.dataset.rating) || 0;
+            const rb = parseFloat(b.dataset.rating) || 0;
+            return ratingSort === 'best' ? rb - ra : ra - rb;
+        }
+        return 0;
+    });
+
+    visibleItems.forEach(item => container.appendChild(item));
+}
+
+document.querySelectorAll('input[name="filter-difficulty"]').forEach(cb => {
+    cb.addEventListener('change', sortRecipes);
+});
+
+document.querySelectorAll('input[name="sort-rating"], input[name="sort-flavor"]').forEach(radio => {
+    radio.addEventListener('change', sortRecipes);
+});
+
+// Tri par note et goût
+document.querySelectorAll('input[name="sort-rating"], input[name="sort-flavor"]').forEach(radio => {
+    radio.addEventListener('change', sortRecipes);
+});
+
+document.querySelectorAll('input[name="filter-diet"]').forEach(cb => {
+    cb.addEventListener('change', sortRecipes);
+});
+
+// Favoris - délégation d'événement
+document.getElementById('recipes-container').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.favorite-btn');
+    if (!btn) return;
+    
+    const recipeId = btn.dataset.recipeId;
+    try {
+        await fetch(`/favorites/${recipeId}`, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' }
+        });
+        const isFav = btn.dataset.favorite === 'true';
+        btn.dataset.favorite = String(!isFav);
+        btn.textContent = !isFav ? '❤️' : '🤍';
+    } catch (err) {
+        console.error('Erreur favori:', err);
+    }
+});
+
+
 </script>

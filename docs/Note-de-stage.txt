@@ -86,6 +86,34 @@ Création du fichiers app.js
 Correction des erreurs dans routes
 Création du fichiers src/views/pages/home.ejs et et les deux pages error dans pages/errors et de views/layouts/home.ejs
 
+Jour 16
+
+Rédaction du dossier projet
+
+Jour 17
+
+Rédaction du dossier projet
+
+Jour 18
+
+Commencement du views
+ - affichage de la page d’accueil
+Création du diapo de fin de formation
+
+Jour 19
+
+Création de la page recette et detail de recette
+Création de la page register et login 
+Affichage des information de la page recette
+Ajout de la fonctionnalité création et connexion de l'utilisateur
+Présentation du projet
+
+Jour 20
+
+Ajout de la fonctionnalité de commenter une recette
+Ajout de la fonctionnalité de noté une recette
+Ajout de la fonctionnalité de de mettre un recette en favori
+
 1 config/
 
 Commence par la config de la base de données, JWT, variables d’environnement.

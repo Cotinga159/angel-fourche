@@ -1,6 +1,5 @@
 
 -- Vue du profil de l'utilisateur avec les stats
-
 CREATE OR REPLACE VIEW v_user_profile_stats AS
 SELECT
     u.id_user,
@@ -10,12 +9,15 @@ SELECT
     u.created_at,
     COUNT(DISTINCT r.id_recipe) AS recipes_count,
     COUNT(DISTINCT c.id_comment) AS comments_count,
-    COUNT(DISTINCT f.recipe_id) AS favorites_count
+    COUNT(DISTINCT f.recipe_id) AS favorites_count,
+    COUNT(DISTINCT ra.id_rating) AS ratings_count 
 FROM users u
 LEFT JOIN recipes r
     ON u.id_user = r.user_id
 LEFT JOIN comments c
-    ON u.id_user = r.user_id
+    ON u.id_user = c.user_id
 LEFT JOIN favorites f
     ON u.id_user = f.user_id
+LEFT JOIN ratings ra
+    ON u.id_user = ra.user_id
 GROUP BY u.id_user;

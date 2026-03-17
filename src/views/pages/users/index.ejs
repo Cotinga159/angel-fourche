@@ -1,0 +1,80 @@
+<main>
+    <% if (currentUser) { %>
+        <h1>Mon profil</h1>
+        <p>Pseudo : <%= currentUser.nameUser %></p>
+        <p>Email : <%= currentUser.email %></p>
+
+        <p>Recettes publiées : 
+            <% if (myRecipesCount > 0) { %>
+                <%= myRecipesCount %>
+            <% } else { %>
+                Aucune
+            <% } %>
+        </p>
+
+        <p>Recettes aimées : 
+            <% if (myFavoritesCount > 0) { %>
+                <%= myFavoritesCount %>
+            <% } else { %>
+                Aucune
+            <% } %>
+        </p>
+        <p>Recettes notées :
+            <% if (myRatingsCount > 0) { %>
+                <%= myRatingsCount %>
+            <% } else { %>
+                Aucune
+            <% } %>
+        </p>
+
+        <p>Commentaires publiés : 
+            <% if (myCommentsCount > 0) { %>
+                <%= myCommentsCount %>
+            <% } else { %>
+                Aucun
+            <% } %>
+        </p>
+
+        <a href="/recipes/new">
+            <button>Créer une recette</button>
+        </a>
+    <% } else { %>
+        <p>Utilisateur non connecté.</p>
+    <% } %>
+
+<h2>Mes recettes publiées</h2>
+<% if (recipes && recipes.length > 0) { %>
+    <% recipes.forEach(recipe => { %>
+        <div>
+            <a href="/recipes/<%= recipe.id %>">
+
+                <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                <h3><%= recipe.title %></h3>
+            </a>
+            <a href="/recipes/<%= recipe.id %>/edit">
+                <button>✏️ Modifier</button>
+                </a>
+            <form action="/recipes/<%= recipe.id %>/delete" method="POST" 
+                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer « <%= recipe.title %> » ? Cette action est irréversible.')">
+                
+                <button type="submit">🗑️ Supprimer</button>
+            </form>
+        </div>
+    <% }) %>
+<% } else { %>
+    <p>Vous n'avez pas encore publié de recette.</p>
+<% } %>
+    <h2>Mes recettes favorites</h2>
+<% if (favorites && favorites.length > 0) { %>
+    <% favorites.forEach(recipe => { %>
+        <div>
+            <a href="/recipes/<%= recipe.id_recipe %>">
+                <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                <h3><%= recipe.title %></h3>
+            </a>
+        </div>
+    <% }) %>
+<% } else { %>
+    <p>Vous n'avez pas encore de recette favorite.</p>
+<% } %>
+</main>

@@ -18,6 +18,16 @@ class FavoriteRepository {
         return rows[0] ? { userId: rows[0].user_id, recipeId: rows[0].recipe_id } : null;
     }
 
+    static async getByUser(userId) {
+    const query = /*sql*/ `
+        SELECT *
+        FROM v_recipes_favorites
+        WHERE user_id = $1;
+    `;
+    const { rows } = await db.query(query, [userId]);
+    return rows;
+}
+
     static async remove(userId, recipeId) {
         const query = /*sql*/ `
         DELETE FROM favorites

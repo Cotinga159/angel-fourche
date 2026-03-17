@@ -1,16 +1,23 @@
 <main>
     <h1><%= recipe.title %></h1>
     
+    <div class="rating-summary">
     <span class="stars">
-    <% const rating = recipe.averageRating || 0; %>
-<% for(let i = 1; i <= 5; i++) { %>
-    <% if(i <= Math.round(rating)) { %>
-        <span class="star full">★</span>
+        <% const rating = recipe.averageRating || 0; %>
+        <% for(let i = 1; i <= 5; i++) { %>
+            <% if(i <= Math.round(rating)) { %>
+                <span class="star full">★</span>
+            <% } else { %>
+                <span class="star empty">☆</span>
+            <% } %>
+        <% } %>
+    </span>
+    <% if (recipe.ratingsCount > 0) { %>
+        <small>(<%= recipe.ratingsCount %> avis)</small>
     <% } else { %>
-        <span class="star empty">☆</span>
+        <small>Aucun avis</small>
     <% } %>
-<% } %>
-</span>
+</div>
 <br>
 
     <% if (recipe.picture) { %>
@@ -49,7 +56,39 @@
         <button type="submit">Noter</button>
     </form>
 
-    <script>
+<% } else { %>
+        <p><a href="/auth/login">Connectez-vous</a> pour donner une note</p>
+<% } %>
+    <h3>Laisser un commentaire</h3>
+    <% if (user) { %>
+    <form action="/comments/<%= recipe.id %>" method="POST">
+        <textarea name="content" placeholder="Votre commentaire..." required></textarea>
+        <button type="submit">Envoyer</button>
+    </form>
+<% } else { %>
+    <p><a href="/auth/login">Connectez-vous</a> pour commenter</p>
+<% } %>
+    <h3>Commentaires (<%= comments.length %>)</h3>
+
+<% if (comments.length > 0) { %>
+    <% comments.forEach(comment => { %>
+    <div class="comment">
+        <strong><%= comment.nameUser %></strong>
+        <p><%= comment.content %></p>
+        <small><%= new Date(comment.createdAt).toLocaleDateString() %></small>
+
+        <% if (user && comment.userId === user) { %>
+        <form action="/comments/<%= comment.id %>/delete" method="POST">
+        <input type="hidden" name="recipeId" value="<%= recipe.id %>">
+        <button type="submit">Supprimer</button>
+</form>
+        <% } %>
+    </div>
+<% }) %>
+<% } else { %>
+    <p>Aucun commentaire pour le moment.</p>
+<% } %>
+<script>
         const stars = document.querySelectorAll('.star-input');
         const ratingValue = document.getElementById('rating-value');
 
@@ -98,42 +137,7 @@
                 });
             });
         });
-    </script>
-    
-<% } else { %>
-        <p><a href="/auth/login">Connectez-vous</a> pour donner une note</p>
-<% } %>
-    <h3>Laisser un commentaire</h3>
-    <% if (user) { %>
-    <form action="/comments/<%= recipe.id %>" method="POST">
-        <textarea name="content" placeholder="Votre commentaire..." required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
-<% } else { %>
-    <p><a href="/auth/login">Connectez-vous</a> pour commenter</p>
-<% } %>
-    <h3>Commentaires (<%= comments.length %>)</h3>
-
-<% if (comments.length > 0) { %>
-    <% comments.forEach(comment => { %>
-    <div class="comment">
-        <strong><%= comment.nameUser %></strong>
-        <p><%= comment.content %></p>
-        <small><%= new Date(comment.createdAt).toLocaleDateString() %></small>
-
-        <% if (user && comment.userId === user) { %>
-        <form action="/comments/<%= comment.id %>/delete" method="POST">
-        <input type="hidden" name="recipeId" value="<%= recipe.id %>">
-        <button type="submit">Supprimer</button>
-</form>
-        <% } %>
-    </div>
-<% }) %>
-<% } else { %>
-    <p>Aucun commentaire pour le moment.</p>
-<% } %>
-<script>
-    document.querySelectorAll('.favorite-btn').forEach(btn => {
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
             const recipeId = btn.dataset.recipeId;
             try {

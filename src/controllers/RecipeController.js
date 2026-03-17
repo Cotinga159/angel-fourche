@@ -3,6 +3,7 @@
 import RecipeService from "../services/RecipeService.js";
 import CommentService from "../services/CommentService.js";
 import FavoriteService from "../services/FavoriteService.js";
+import CategoryRepository from "../repositories/PgCategoryRepository.js";
 
 class RecipeController {
 
@@ -13,6 +14,9 @@ class RecipeController {
     try {
         const userId = req.session.userId || null;
         const recipes = await RecipeService.getAll(userId);
+        const myRecipesCount = userId 
+        ? recipes.filter(r => r.userId === userId).length 
+        : 0;
         let favoriteIds = [];
         if (userId) {
             const favorites = await Promise.all(
@@ -27,6 +31,7 @@ class RecipeController {
         recipes,
         favoriteIds,
         user: userId,
+        myRecipesCount,
         });
     } catch (error) {
         req.flash("error", error.message);
@@ -66,43 +71,119 @@ class RecipeController {
     /**
    * Crée une nouvelle recette
    */
-    async create(req, res) {
+async create(req, res) {
     try {
+        console.log("req.body:", req.body);
+        console.log("userId:", req.session.userId);
         const userId = req.session.userId;
-        if (!userId) {
-        req.flash("error", "Vous devez être connecté pour ajouter une recette");
-        return res.redirect("/auth/login");
-        }
+        const quantities = [].concat(req.body.ingredient_quantity || []);
+        const units      = [].concat(req.body.ingredient_unit || []);
+        const names      = [].concat(req.body.ingredient_name || []);
 
-        const recipeData = { ...req.body, userId };
-        await RecipeService.addRecipe(recipeData);
+        const ingredients = names.map((name, i) => ({
+        quantity: quantities[i] ? parseFloat(quantities[i]) : null,
+        unit:     units[i] || null,
+        name:     name.trim()
+        }));
 
+const steps = Array.isArray(req.body.step)
+    ? req.body.step.map((s, i) => ({ step_number: i + 1, instruction: s }))
+    : [{ step_number: 1, instruction: req.body.step }];
+        const recipeData = { 
+            userId,
+            categoryId:      req.body.category_id,
+            title:           req.body.title,
+            description:     req.body.description,
+            ingredient:      ingredients,
+            step:            steps,
+            preparationTime: req.body.preparation_time,  
+            serving:         req.body.serving,
+            difficulty:      req.body.difficulty,
+            picture:         req.body.picture,
+            typeDiet:        req.body.type_diet,        
+            dietReligious:   req.body.diet_religious,    
+            typeFlavor:      req.body.type_flavor,       
+        
+        };
+
+        console.log("recipeData:", recipeData);
+        const recipe = await RecipeService.create(recipeData);
+        console.log("recette créée:", recipe);
         req.flash("success", "Recette ajoutée !");
         res.redirect("/recipes");
     } catch (error) {
+        console.log("ERREUR création recette:", error.message);
         req.flash("error", error.message);
-        res.redirect("back");
+        res.redirect("/recipes");
     }
+}
+
+    async showCreateForm(req, res) {
+    try {
+        res.render("pages/recipes/new");
+    } catch (error) {
+        req.flash("error", error.message);
+        res.redirect("/recipes");
     }
+}
 
     /**
    * Met à jour une recette existante
    */
     async update(req, res) {
     try {
-        const userId = req.session.userId;
         const recipeId = req.params.id;
 
-        await RecipeService.updateRecipe(recipeId, userId, req.body);
+        const quantities = [].concat(req.body.ingredient_quantity || []);
+        const units      = [].concat(req.body.ingredient_unit || []);
+        const names      = [].concat(req.body.ingredient_name || []);
+        const ingredients = names.map((name, i) => ({
+            quantity: quantities[i] ? parseFloat(quantities[i]) : null,
+            unit:     units[i] || null,
+            name:     name.trim()
+        }));
 
+        const steps = [].concat(req.body.step || []).map((s, i) => ({
+            step_number: i + 1,
+            instruction: s.trim()
+        }));
+
+        const recipeData = {
+            categoryId:      req.body.category_id,
+            title:           req.body.title,
+            description:     req.body.description,
+            ingredient:      ingredients,
+            step:            steps,
+            preparationTime: req.body.preparation_time,
+            serving:         req.body.serving,
+            difficulty:      req.body.difficulty,
+            picture:         req.body.picture,
+            typeDiet:        req.body.type_diet,
+            dietReligious:   req.body.diet_religious || null,
+            typeFlavor:      req.body.type_flavor,
+        };
+
+        await RecipeService.update(recipeId, recipeData);
         req.flash("success", "Recette mise à jour !");
         res.redirect(`/recipes/${recipeId}`);
     } catch (error) {
         req.flash("error", error.message);
-        res.redirect("back");
+        res.redirect("/users");
     }
+}
+async showEditForm(req, res) {
+    try {
+        console.log("showEditForm id:", req.params.id);
+        const recipe = await RecipeService.getById(req.params.id);
+        console.log("recipe:", recipe);
+        const categories = await CategoryRepository.findAll();
+        res.render("pages/recipes/edit", { recipe, categories });
+    } catch (error) {
+        console.log("ERREUR showEditForm:", error.message);
+        req.flash("error", error.message);
+        res.redirect("/users");
     }
-
+}
     /**
    * Supprime une recette
    */
@@ -111,13 +192,13 @@ class RecipeController {
         const userId = req.session.userId;
         const recipeId = req.params.id;
 
-        await RecipeService.deleteRecipe(recipeId, userId);
+        await RecipeService.delete(recipeId, userId);
 
         req.flash("success", "Recette supprimée !");
-        res.redirect("/recipes");
+        res.redirect("/users");
     } catch (error) {
         req.flash("error", error.message);
-        res.redirect("back");
+        res.redirect("/users");
     }
     }
 }

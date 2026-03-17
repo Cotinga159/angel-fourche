@@ -20,13 +20,13 @@ class RecipeService {
         if (!data.userId) {
             throw new Error("Un utilisateur doit être associé à la recette");
         }
-        if (!data.categoryId) {
-            throw new Error("La recette doit appartenir à une catégorie");
-        }
 
         return RecipeRepository.create(data);
     }
-
+static async search(query) {
+    if (!query || !query.trim()) return [];
+    return RecipeRepository.search(query.trim());
+}
     static async getAll() {
     return RecipeRepository.findAllComplete();
 }

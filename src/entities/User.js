@@ -21,9 +21,14 @@ class User {
             this.favoritesCount = parseInt(data.favorites_count, 10);
         }
 
-        // Relation optionnelles si JOIN ou vue
-        if (data.recipes_list) this.recipes = data.recipes_list.map(r => new Recipe(r));
-        if (data.favorites_list) this.favorites = data.favorites_list.map(r => Recipe(r));
+        if (data.comments_count !== undefined) {
+        this.commentsCount = parseInt(data.comments_count, 10);
+        }
+
+        if (data.ratings_count !== undefined) {
+        this.ratingsCount = parseInt(data.ratings_count, 10);
+        }
+
     }
 
     static fromDatabase(row) {
@@ -46,6 +51,8 @@ class User {
 
             ...(this.recipesCount !== undefined && { recipesCount: this.recipesCount }),
             ...(this.favoritesCount !== undefined && { favoritesCount: this.favoritesCount }),
+            ...(this.commentsCount !== undefined && { commentsCount: this.commentsCount }),
+            ...(this.ratingsCount !== undefined && { ratingsCount: this.ratingsCount }),
         };
     }
 

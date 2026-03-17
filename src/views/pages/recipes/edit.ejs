@@ -1,0 +1,110 @@
+<main>
+    <h1>Modifier la recette</h1>
+
+    <form action="/recipes/<%= recipe.id %>/update" method="POST">
+<br>
+        <label for="title">Titre de la recette</label>
+        <input type="text" id="title" name="title" value="<%= recipe.title %>" required>
+<br>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" required><%= recipe.description %></textarea>
+<br>
+        <label for="category_id">Catégorie</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">-- Choisir une catégorie --</option>
+            <% categories.forEach(cat => { %>
+                <option value="<%= cat.id %>" <%= recipe.categoryId === cat.id ? 'selected' : '' %>>
+                    <%= cat.nameCategory %>
+                </option>
+            <% }) %>
+        </select>
+<br>
+        <h3>Ingrédients</h3>
+        <div id="ingredients-container">
+            <% recipe.ingredient.forEach(ing => { %>
+                <div class="ingredient-item">
+                    <input type="number" name="ingredient_quantity[]" value="<%= ing.quantity %>" placeholder="Quantité">
+                    <input type="text" name="ingredient_unit[]" value="<%= ing.unit %>" placeholder="Unité">
+                    <input type="text" name="ingredient_name[]" value="<%= ing.name %>" placeholder="Nom" required>
+                </div>
+            <% }) %>
+        </div>
+        <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
+<br>
+        <h3>Instructions</h3>
+        <div id="steps-container">
+            <% recipe.step.forEach((s, i) => { %>
+                <div class="step-item">
+                    <textarea name="step[]" required><%= s.instruction %></textarea>
+                </div>
+            <% }) %>
+        </div>
+        <button type="button" id="add-step">+ Ajouter une instruction</button>
+<br>
+        <label for="preparation_time">Temps de préparation (minutes)</label>
+        <input type="number" id="preparation_time" name="preparation_time" value="<%= recipe.preparationTime %>" min="1" required>
+<br>
+        <label for="serving">Nombre de portions</label>
+        <input type="number" id="serving" name="serving" value="<%= recipe.serving %>" min="1" required>
+<br>
+        <label for="difficulty">Difficulté</label>
+        <select id="difficulty" name="difficulty">
+            <option value="Facile"    <%= recipe.difficulty === 'Facile'    ? 'selected' : '' %>>Facile</option>
+            <option value="Moyen"     <%= recipe.difficulty === 'Moyen'     ? 'selected' : '' %>>Moyen</option>
+            <option value="Difficile" <%= recipe.difficulty === 'Difficile' ? 'selected' : '' %>>Difficile</option>
+        </select>
+<br>
+        <label for="picture">Image de la recette (URL)</label>
+        <input type="url" id="picture" name="picture" value="<%= recipe.picture %>" placeholder="https://...">
+<br>
+        <label for="type_diet">Type de régime</label>
+        <select id="type_diet" name="type_diet">
+            <option value="">Aucun</option>
+            <option value="végétarien" <%= recipe.typeDiet === 'végétarien' ? 'selected' : '' %>>Végétarien</option>
+            <option value="vegan"      <%= recipe.typeDiet === 'vegan'      ? 'selected' : '' %>>Vegan</option>
+            <option value="omnivore"   <%= recipe.typeDiet === 'omnivore'   ? 'selected' : '' %>>Omnivore</option>
+        </select>
+<br>
+        <label for="diet_religious">Régime religieux</label>
+        <select id="diet_religious" name="diet_religious">
+            <option value="">Aucun</option>
+            <option value="halal"  <%= recipe.dietReligious === 'halal'  ? 'selected' : '' %>>Halal</option>
+            <option value="casher" <%= recipe.dietReligious === 'casher' ? 'selected' : '' %>>Casher</option>
+            <option value="hindou" <%= recipe.dietReligious === 'hindou' ? 'selected' : '' %>>Hindou</option>
+        </select>
+<br>
+        <label for="type_flavor">Type de goût</label>
+        <select id="type_flavor" name="type_flavor">
+            <option value="">Aucun</option>
+            <option value="sucre" <%= recipe.typeFlavor === 'sucre' ? 'selected' : '' %>>Sucré</option>
+            <option value="salé"  <%= recipe.typeFlavor === 'salé'  ? 'selected' : '' %>>Salé</option>
+        </select>
+<br>
+        <button type="submit">💾 Enregistrer les modifications</button>
+
+    </form>
+</main>
+
+<script>
+    document.getElementById("add-ingredient").addEventListener("click", () => {
+        const container = document.getElementById("ingredients-container");
+        const count = container.children.length + 1;
+        const div = document.createElement("div");
+        div.classList.add("ingredient-item");
+        div.innerHTML = `
+            <input type="number" name="ingredient_quantity[]" placeholder="Quantité">
+            <input type="text" name="ingredient_unit[]" placeholder="Unité">
+            <input type="text" name="ingredient_name[]" placeholder="Ingrédient ${count}" required>
+        `;
+        container.appendChild(div);
+    });
+
+    document.getElementById("add-step").addEventListener("click", () => {
+        const container = document.getElementById("steps-container");
+        const count = container.children.length + 1;
+        const div = document.createElement("div");
+        div.classList.add("step-item");
+        div.innerHTML = `<textarea name="step[]" placeholder="Instruction ${count}" required></textarea>`;
+        container.appendChild(div);
+    });
+</script>

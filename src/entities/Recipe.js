@@ -38,7 +38,9 @@ this.step = Array.isArray(data.step)
         if (data.average_rating !== undefined) {
             this.averageRating = parseFloat(data.average_rating);
         }
-
+        if (data.ratings_count !== undefined) {
+        this.ratingsCount = parseInt(data.ratings_count, 10);
+        }
 
         // Relations optionnelles
         if (data.user_pseudo) {

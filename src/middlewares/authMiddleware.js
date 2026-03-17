@@ -19,7 +19,7 @@ export const injectUserToLocals = (req, res, next) => {
     ? {
         id: req.session.userId,
         email: req.session.email,
-        pseudo: req.session.pseudo,
+        nameUser: req.session.nameUser,
         role: req.session.roleName,
       }
     : null;
