@@ -20,7 +20,8 @@
     <% if (locals.currentUser) { %>
     <li>
         <form action="/auth/logout" method="POST">
-            <button type="submit">Se déconnecter</button>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit">Se déconnecter</button>
         </form>
     </li>
 <% } else { %>

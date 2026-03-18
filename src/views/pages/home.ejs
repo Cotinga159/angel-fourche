@@ -1,9 +1,74 @@
 <!-- src/views/pages/home.ejs -->
 
-    <header>
-        <h1>Bienvenue sur Angel Fourche</h1>
-    </header>
-    <main>
-    </main>
+<header>
+    <h1>Bienvenue sur Angel Fourche</h1>
+    <p>Chaque recette raconte une histoire. Partagez la vôtre.</p>
+</header>
+
+<main>
+    <!-- Recettes les plus mises en favoris cette semaine -->
+    <section>
+        <h2>❤️ Tendances de la semaine</h2>
+        <% if (topFavorites && topFavorites.length > 0) { %>
+            <div>
+                <% topFavorites.forEach(recipe => { %>
+                    <div>
+                        <a href="/recipes/<%= recipe.id %>">
+                            <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                            <h3><%= recipe.title %></h3>
+                            <p>❤️ <%= recipe.favoritesCount %> favoris</p>
+                            <p>Difficulté : <%= recipe.difficulty %></p>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>Aucune recette cette semaine.</p>
+        <% } %>
+    </section>
+
+    <!-- Recettes les mieux notées -->
+    <section>
+        <h2>⭐ Les mieux notées</h2>
+        <% if (topRated && topRated.length > 0) { %>
+            <div>
+                <% topRated.forEach(recipe => { %>
+                    <div>
+                        <a href="/recipes/<%= recipe.id %>">
+                            <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                            <h3><%= recipe.title %></h3>
+                            <p>⭐ <%= recipe.averageRating %> / 5</p>
+                            <p>Difficulté : <%= recipe.difficulty %></p>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>Aucune recette notée pour le moment.</p>
+        <% } %>
+    </section>
+
+    <!-- Meilleures recettes par catégorie -->
+    <section>
+        <h2>🏆 Les meilleures par catégorie</h2>
+        <% if (topByCategory && topByCategory.length > 0) { %>
+            <div>
+                <% topByCategory.forEach(recipe => { %>
+                    <div>
+                        <a href="/recipes/<%= recipe.id %>">
+                            <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
+                            <h3><%= recipe.title %></h3>
+                            <p>📂 <%= recipe.category ? recipe.category.name : '' %></p>
+                            <p>⭐ <%= recipe.averageRating ?? 'Non notée' %></p>
+                            <p>Difficulté : <%= recipe.difficulty %></p>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>Aucune recette pour le moment.</p>
+        <% } %>
+    </section>
+</main>
 
 

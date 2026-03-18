@@ -1,5 +1,18 @@
 TRUNCATE TABLE favorites CASCADE;
 
 INSERT INTO favorites (user_id, recipe_id) VALUES
-('471cec1e-1b52-4c9e-bd13-8810ee672ef4', 'e798f2a7-af70-4c6c-b165-d1d83e85b25c')
+('471cec1e-1b52-4c9e-bd13-8810ee672ef4', 'e798f2a7-af70-4c6c-b165-d1d83e85b25c'),
+('cbaacdb3-0798-4235-9272-733e22615f2e', 'e798f2a7-af70-4c6c-b165-d1d83e85b25c'),
+('cbaacdb3-0798-4235-9272-733e22615f2e', 'b2c3d4e5-f6a7-8901-bcde-f12345678901'),
+('cbaacdb3-0798-4235-9272-733e22615f2e', 'f3a4b5c6-d7e8-9012-cdef-123456789013'),
+('cbaacdb3-0798-4235-9272-733e22615f2e', 'f6a7b8c9-d0e1-2345-fabc-456789012346'),
+('d31e431c-6f6e-4cc6-861b-6d9095ed5e4e', 'e798f2a7-af70-4c6c-b165-d1d83e85b25c'),
+('d31e431c-6f6e-4cc6-861b-6d9095ed5e4e', 'f6a7b8c9-d0e1-2345-fabc-456789012346'),
+('d31e431c-6f6e-4cc6-861b-6d9095ed5e4e', 'b2c3d4e5-f6a7-8901-bcde-f12345678901'),
+('d31e431c-6f6e-4cc6-861b-6d9095ed5e4e', 'a1b2c3d4-e444-4c6c-b165-d1d83e85b444'),
+('471cec1e-1b52-4c9e-bd13-8810ee672ef4', 'b2c3d4e5-f6a7-8901-bcde-f12345678901'),
+('471cec1e-1b52-4c9e-bd13-8810ee672ef4', 'f6a7b8c9-d0e1-2345-fabc-456789012346'),
+('db937cac-d99d-4b0d-bd4b-6e23438589ba', 'e798f2a7-af70-4c6c-b165-d1d83e85b25c'),
+('db937cac-d99d-4b0d-bd4b-6e23438589ba', 'b2c3d4e5-f6a7-8901-bcde-f12345678901'),
+('db937cac-d99d-4b0d-bd4b-6e23438589ba', 'f3a4b5c6-d7e8-9012-cdef-123456789013')
 

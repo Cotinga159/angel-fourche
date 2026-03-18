@@ -39,6 +39,18 @@ static async search(query) {
     static async delete(recipeId) {
         return RecipeRepository.delete(recipeId);
     }
+
+    static async getTopFavoritesWeek() {
+    return RecipeRepository.getTopFavoritesWeek();
+}
+
+static async getTopRated() {
+    return RecipeRepository.getTopRated();
+}
+
+static async getTopByCategory() {
+    return RecipeRepository.getTopByCategory();
+}
 }
 
 export default RecipeService;

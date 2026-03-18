@@ -58,6 +58,27 @@ import User from "../entities/User.js";
         return rows[0] ? new User(rows[0]) : null;
     }
 
+
+    static async findByEmailOrUsername(identifier) {
+    const query = /*sql*/ `
+        SELECT
+            id_user,
+            email,
+            password_hash,
+            name_user,
+            role_name,
+            gdpr_consent,
+            gdpr_consent_date,
+            created_at,
+            updated_at
+        FROM users
+        WHERE LOWER(email) = LOWER($1)
+            OR LOWER(name_user) = LOWER($1);
+    `;
+    const { rows } = await db.query(query, [identifier]);
+    return rows[0] ? new User(rows[0]) : null;
+}
+
     /**
    * Profil utilisateur avec statistiques
    * ⚠️ Lecture via vue SQL

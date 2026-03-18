@@ -46,9 +46,9 @@ this.step = Array.isArray(data.step)
         if (data.user_pseudo) {
             this.author = { id: data.user_id, pseudo: data.user_pseudo, email: data.user_email };
         }
-        if (data.category_name) { 
-            this.category = { id: data.category_id, name: data.category_name};
-        }
+        if (data.name_category) {
+    this.category = { id: data.category_id, name: data.name_category };
+}
         if (data.comments_list) {
             this.comments = data.comments_list.map(c => new Comment(c));
         }

@@ -20,7 +20,7 @@ INSERT INTO recipes (
 (
     'e798f2a7-af70-4c6c-b165-d1d83e85b25c',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Oreo Cake',
     'Égayons nos papilles avec un cake aux Oreo, un dessert qui ravira petits et grands avec sa texture moelleuse et son goût chocolaté emblématique. Facile à réaliser, ce cake est idéal pour se faire plaisir sans passer des heures en cuisine. Parfait pour les goûters improvisés ou les desserts du week-end, sa préparation vous encouragera à mettre la main à la pâte avec enthousiasme.',
     '[
@@ -53,7 +53,7 @@ INSERT INTO recipes (
 (
     'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Tarte aux Pommes Classique',
     'Une tarte aux pommes traditionnelle, dorée et parfumée à la cannelle. Ce dessert intemporel fait le bonheur de toute la famille avec sa pâte croustillante et sa garniture fondante. Simple à préparer, elle embaume la cuisine d''une odeur irrésistible à la sortie du four.',
     '[
@@ -87,7 +87,7 @@ INSERT INTO recipes (
 (
     'b2c3d4e5-f6a7-8901-bcde-f12345678901',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Poulet Rôti aux Herbes',
     'Un poulet rôti croustillant et juteux, parfumé aux herbes de Provence et à l''ail. Ce grand classique de la cuisine française est idéal pour un repas dominical en famille. La cuisson lente au four garantit une chair tendre et une peau parfaitement dorée.',
     '[
@@ -123,7 +123,7 @@ INSERT INTO recipes (
 (
     'c3d4e5f6-a7b8-9012-cdef-123456789012',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '605daeb6-5f81-4fe4-9dcd-4c5aac9dfa8a',
     'Soupe à l''Oignon Gratinée',
     'La soupe à l''oignon gratinée est un symbole de la cuisine bistrot française. Avec ses oignons lentement caramélisés, son bouillon savoureux et sa croûte de fromage fondu, elle réchauffe le corps et l''âme. Un plat réconfortant parfait pour les soirées hivernales.',
     '[
@@ -161,7 +161,7 @@ INSERT INTO recipes (
 (
     'd4e5f6a7-b8c9-0123-defa-234567890123',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Crêpes Bretonnes',
     'Les crêpes bretonnes, fines et légères, sont un incontournable de la cuisine française. Que ce soit pour un goûter, un dessert ou même un brunch, elles se déclinent à l''infini avec des garnitures sucrées ou salées. Cette recette traditionnelle vous garantit des crêpes parfaites à chaque fois.',
     '[
@@ -196,7 +196,7 @@ INSERT INTO recipes (
 (
     'e5f6a7b8-c9d0-1234-efab-345678901234',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Ratatouille Provençale',
     'La ratatouille provençale est un hymne aux légumes du soleil. Ce plat coloré et savoureux, originaire de Nice, marie courgettes, aubergines, poivrons et tomates dans une symphonie de saveurs méditerranéennes. Un plat végétarien complet qui se déguste chaud ou froid.',
     '[
@@ -235,7 +235,7 @@ INSERT INTO recipes (
 (
     'f3a4b5c6-d7e8-9012-cdef-123456781013',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Tiramisu Classique',
     'Le tiramisu est un dessert italien irrésistible, avec ses couches de biscuits imbibés de café et sa crème mascarpone légère et onctueuse. Saupoudré de cacao, il est à la fois élégant et gourmand. Un dessert qui fait toujours l''unanimité.',
     '[
@@ -266,7 +266,7 @@ INSERT INTO recipes (
 (
     'f5a6b7c8-d9e0-1234-efab-375678901235',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Fondant au Chocolat',
     'Le fondant au chocolat est LE dessert des amateurs de chocolat. Avec son cœur coulant et sa croûte légèrement craquante, il est irrésistible. Simple et rapide à préparer, il impressionnera vos convives à coup sûr.',
     '[
@@ -296,7 +296,7 @@ INSERT INTO recipes (
 (
     'f1a2b3c4-d5e6-7890-abcd-ef1234567891',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Tacos al Pastor',
     'Les tacos al pastor sont un symbole de la street food mexicaine. La viande de porc marinée aux épices et aux ananas, cuite lentement, se glisse dans des tortillas chaudes garnies de coriandre et d''oignon. Un explosion de saveurs fumées et acidulées.',
     '[
@@ -329,7 +329,7 @@ INSERT INTO recipes (
 (
     'f2a3b4c5-d6e7-8901-bcde-f12345678902',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Ramen Tonkotsu',
     'Le ramen tonkotsu est un incontournable de la cuisine japonaise. Son bouillon crémeux et riche, obtenu après des heures de cuisson d''os de porc, est une véritable ode à la patience et au savoir-faire. Servi avec des nouilles, un œuf mollet et du porc fondant.',
     '[
@@ -362,7 +362,7 @@ INSERT INTO recipes (
 (
     'f3a4b5c6-d7e8-9012-cdef-123456789013',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Butter Chicken',
     'Le butter chicken, ou murgh makhani, est l''un des plats indiens les plus appréciés dans le monde. Le poulet tendre mariné au yaourt et aux épices mijote dans une sauce tomate crémeuse et parfumée au beurre. Un plat savoureux et réconfortant.',
     '[
@@ -395,7 +395,7 @@ INSERT INTO recipes (
 (
     'f4a5b6c7-d8e9-0123-defa-234567890124',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Cazuela Chilienne',
     'La cazuela est le plat réconfortant par excellence au Chili. Ce ragoût généreux mêle viande de bœuf, légumes et épices dans un bouillon savoureux. Servi dans un grand bol fumant, il rassemble toute la famille autour de la table.',
     '[
@@ -428,7 +428,7 @@ INSERT INTO recipes (
 (
     'f5a6b7c8-d9e0-1234-efab-345678901235',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Couscous Tunisien',
     'Le couscous tunisien se distingue par sa sauce rouge épicée et parfumée au harissa. La semoule fine et légère absorbe un bouillon généreux enrichi de légumes et d''agneau fondant. Un plat festif et convivial qui réunit toute la famille.',
     '[
@@ -461,7 +461,7 @@ INSERT INTO recipes (
 (
     'f6a7b8c9-d0e1-2345-fabc-456789012346',
     '830a9585-0f66-4d6e-9023-d1151343471d',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Romazava Malgache',
     'Le romazava est le plat national de Madagascar. Ce bouillon parfumé à base de viande de bœuf et de brèdes — feuilles de légumes locaux — est simple mais profondément savoureux. Servi avec du riz blanc, il incarne toute la générosité de la cuisine malgache.',
     '[
@@ -494,7 +494,7 @@ INSERT INTO recipes (
 (
     'f1a2b3c4-e111-4c6c-b165-d1d83e85c111',
     'cbaacdb3-0798-4235-9272-733e22615f2e',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Boeuf Wellington',
     'Un grand classique de la cuisine gastronomique avec une cuisson précise et un montage délicat.',
     '[
@@ -524,7 +524,7 @@ INSERT INTO recipes (
 (
     'f1a2b3c4-e222-4c6c-b165-d1d83e85c222',
     'd31e431c-6f6e-4cc6-861b-6d9095ed5e4e',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    '6a5dee1c-3777-430f-a4a7-b911249bea09',
     'Macarons à la framboise',
     'Une pâtisserie française délicate nécessitant précision et technique.',
     '[
@@ -554,7 +554,7 @@ INSERT INTO recipes (
 (
     'a1b2c3d4-e444-4c6c-b165-d1d83e85b444',
     'db937cac-d99d-4b0d-bd4b-6e23438589ba',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Poulet au Curry',
     'Un plat parfumé et épicé qui apporte une touche exotique à votre table.',
     '[
@@ -611,7 +611,7 @@ INSERT INTO recipes (
 (
     'a1b2c3d4-e111-4c6c-b165-d1d83e85b111',
     'cbaacdb3-0798-4235-9272-733e22615f2e',
-    '1464d31d-6ca3-4d0e-af41-1b1c46b3d271',
+    'ac94e4f6-4895-47bb-b8e0-88e754052db7',
     'Pâtes Carbonara',
     'Un grand classique italien crémeux et savoureux, parfait pour un repas rapide et réconfortant.',
     '[

@@ -92,16 +92,31 @@ static async findAllWithRatings() {
     }
 
         // Recherche de recettes par mot clé
-    static async searchByKeyword(keyword) {
-        const query = /*sql*/ `
+static async searchByKeyword(keyword) {
+    const words = keyword.trim().split(/\s+/);
+    
+    const conditions = words.map((_, i) => `(
+        title ILIKE $${i + 1}
+        OR description ILIKE $${i + 1}
+        OR ingredient::text ILIKE $${i + 1}
+        OR diet_religious ILIKE $${i + 1}
+        OR difficulty ILIKE $${i + 1}
+        OR type_flavor ILIKE $${i + 1}
+        OR type_diet ILIKE $${i + 1}
+    )`).join(" AND ");
+
+    const values = words.map(w => `%${w}%`);
+
+    const query = /*sql*/ `
         SELECT *
         FROM v_recipes_search
-        WHERE title ILIKE $1 OR description ILIKE $1
+        WHERE ${conditions}
         ORDER BY created_at DESC;
-        `;
-        const { rows } = await db.query(query, [`%${keyword}%`]);
-        return rows.map((row) => new Recipe(row));
-    }
+    `;
+
+    const { rows } = await db.query(query, values);
+    return rows.map((row) => new Recipe(row));
+}
     
     static async create(data) {
         const query = /*sql*/ `
@@ -192,6 +207,26 @@ static async findAllWithRatings() {
     `;
     const { rows } = await db.query(query, [id]);
     return rows.length > 0;
+}
+static async getTopFavoritesWeek() {
+    const { rows } = await db.query(`
+        SELECT * FROM v_recipes_top_favorites_week LIMIT 6
+    `);
+    return rows.map(row => new Recipe(row));
+}
+
+static async getTopRated() {
+    const { rows } = await db.query(`
+        SELECT * FROM v_recipes_top_rated LIMIT 6
+    `);
+    return rows.map(row => new Recipe(row));
+}
+
+static async getTopByCategory() {
+    const { rows } = await db.query(`
+        SELECT * FROM v_recipes_top_by_category
+    `);
+    return rows.map(row => new Recipe(row));
 }
 }
 

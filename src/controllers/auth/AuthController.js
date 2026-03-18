@@ -15,45 +15,47 @@ class AuthController {
    * Affiche la page d'inscription
    */
     async showRegister(req, res) {
-    if (req.session.userId) {
-        return res.redirect("/recipes");
-    }
-
+    if (req.session.userId) return res.redirect("/recipes");
     res.render("pages/auth/register", {
         title: "Inscription - Angel Fourche",
-        // csrfToken:generateToken(req, res),
+        csrfToken: generateToken(req),
     });
-    }
-
+}
     /**
    * Traite l'inscription
    */
-    async handleRegister(req, res) {
-
+async handleRegister(req, res) {
     try {
-        await AuthService.register(req.body);
-
-        req.flash("success", "Compte créé avec succès ✅");
-        res.redirect("/auth/login");
+        const user = await AuthService.register(req.body);
+        
+        req.session.userId   = user.id;
+        req.session.email    = user.email;
+        req.session.nameUser = user.nameUser;
+        req.session.roleName = user.roleName;
+        req.flash("success", `Bienvenue ${user.nameUser} 👋`);
+        res.redirect("/recipes");
     } catch (error) {
-        req.flash("error", error.message);
-        res.redirect("/auth/register");
-    }   
+        res.render("pages/auth/register", {
+            title: "Inscription - Angel Fourche",
+            error: error.message,
+            formData: {
+                nameUser: req.body.nameUser,
+                email:    req.body.email,
+            }
+        });
     }
+}
 
     /**
    * Affiche la page de connexion
    */
-    async showLogin(req, res) {
-    if (req.session.userId) {
-        return res.redirect("/recipes");
-    }
-
+async showLogin(req, res) {
+    if (req.session.userId) return res.redirect("/recipes");
     res.render("pages/auth/login", {
         title: "Connexion - Angel Fourche",
-        // csrfToken: generateToken(req, res),
+        csrfToken: generateToken(req),
     });
-    }
+}
 
     /**
    * Traite la connexion

@@ -4,6 +4,7 @@
  *
  * @module middlewares/authMiddleware
  */
+import { generateToken } from "../config/security.js";
 
 /**
  * Injecte les données de l'utilisateur connecté dans res.locals
@@ -23,6 +24,7 @@ export const injectUserToLocals = (req, res, next) => {
         role: req.session.roleName,
       }
     : null;
+    res.locals.csrfToken = generateToken(req);
   next();
 };
 

@@ -1,33 +1,33 @@
 <main>
     <h1>Inscription</h1>
 
-   <% if (locals.flash && locals.flash.error) { %>
-    <p style="color:red"><%= locals.flash.error %></p>
-<% } %>
-<% if (locals.flash && locals.flash.success) { %>
-    <p style="color:green"><%= locals.flash.success %></p>
+
+    <% if (locals.error) { %>
+    <p style="color:red"><%= locals.error %></p>
 <% } %>
 
-    <form action="/auth/register" method="POST">
+<form action="/auth/register" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Nom d'utilisateur</label>
+    <input type="text" name="nameUser" 
+            value="<%= locals.formData ? locals.formData.nameUser : '' %>" required>
 
+    <label>Email</label>
+    <input type="email" name="email" 
+            value="<%= locals.formData ? locals.formData.email : '' %>" required>
 
-        <label>Nom d'utilisateur</label>
-        <input type="text" name="nameUser" required>
+    <label>Mot de passe</label>
+    <input type="password" name="password" required>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
+    <label>Confirmer le mot de passe</label>
+    <input type="password" name="passwordConfirm" required>
 
-        <label>Mot de passe</label>
-        <input type="password" name="password" required>
-
-        <label>
-            <input type="checkbox" name="gdprConsent" value="true" required>
-            J'accepte les conditions d'utilisation
-        </label>
-
-        <button type="submit">S'inscrire</button>
-    </form>
-
+    <label>
+        <input type="checkbox" name="gdprConsent" value="true" required>
+        J'accepte les conditions d'utilisation
+    </label>
+    <button type="submit">S'inscrire</button>
+</form>
     <p>Déjà un compte ? <a href="/auth/login">Se connecter</a></p>
     
 </main>

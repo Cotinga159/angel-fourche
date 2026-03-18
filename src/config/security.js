@@ -4,15 +4,10 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
-import { doubleCsrf } from "csrf-csrf";
+import { csrfSync } from "csrf-sync";
 import logger from "./logger.js";
-
-/**
- * Configuration sécurité globale de l'application
- *
- * @see https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
- * @see https://github.com/Psifi-Solutions/csrf-csrf
- */
+import * as csrfSyncModule from "csrf-sync";
+console.log("csrf-sync exports:", Object.keys(csrfSyncModule));
 
 const isTestEnv = process.env.NODE_ENV === "test";
 
@@ -21,7 +16,7 @@ const isTestEnv = process.env.NODE_ENV === "test";
 // ═══════════════════════════════════════════════════════════════
 
 if (!isTestEnv && !process.env.CSRF_SECRET) {
-  throw new Error("❌ CSRF_SECRET manquant. Ajoute-le dans ton fichier .env");
+    throw new Error("❌ CSRF_SECRET manquant. Ajoute-le dans ton fichier .env");
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -29,15 +24,15 @@ if (!isTestEnv && !process.env.CSRF_SECRET) {
 // ═══════════════════════════════════════════════════════════════
 
 export const securityHeaders = helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            imgSrc: ["'self'", "data:", "https:"],
+        },
     },
-  },
 });
 
 // ═══════════════════════════════════════════════════════════════
@@ -45,8 +40,8 @@ export const securityHeaders = helmet({
 // ═══════════════════════════════════════════════════════════════
 
 export const corsConfig = cors({
-  origin: process.env.APP_FRONTEND_URL || "http://localhost:3000",
-  credentials: true,
+    origin: process.env.APP_FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
 });
 
 // ═══════════════════════════════════════════════════════════════
@@ -54,76 +49,41 @@ export const corsConfig = cors({
 // ═══════════════════════════════════════════════════════════════
 
 export const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 1000,
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => req.ip === "127.0.0.1",
+    windowMs: 15 * 60 * 1000,
+    max: 1000,
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (req) => req.ip === "127.0.0.1",
 });
 
 export const authLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 10,
-  message: "Trop de tentatives de connexion. Réessayez plus tard.",
+    windowMs: 60 * 60 * 1000,
+    max: 10,
+    message: "Trop de tentatives de connexion. Réessayez plus tard.",
 });
 
 // ═══════════════════════════════════════════════════════════════
-// CSRF (Double Submit Cookie)
+// CSRF (Synchronised Token Pattern)
 // Désactivé en environnement test
 // ═══════════════════════════════════════════════════════════════
 
-let generateCsrfToken;
+let generateToken;
 let doubleCsrfProtection;
 
 if (!isTestEnv) {
-  const csrf = doubleCsrf({
-    getSecret: () => process.env.CSRF_SECRET,
-
-    /**
-     * Identifiant de pseudo-session stable (SSR friendly)
-     * @see https://github.com/Psifi-Solutions/csrf-csrf#without-express-session
-     */
-    getSessionIdentifier: (req) => req.session.id,
-
-    cookieName: process.env.NODE_ENV === "production" ? "__Host-csrf" : "csrf",
-    csrfTokenFieldName: "_csrf",
-    
-    cookieOptions: {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    },
-
-    onError: (req, res) => {
-      logger.warn({ ip: req.ip, url: req.originalUrl }, "❌ CSRF détecté");
-
-      return res.status(403).render("pages/errors/403", {
-        title: "Action non autorisée",
-        message: "Action non autorisée ou session expirée.",
-      });
-    },
-  });
-
-  generateCsrfToken = csrf.generateCsrfToken;
-  doubleCsrfProtection = csrf.doubleCsrfProtection;
+    const csrfSyncInstance = csrfSync({
+        getTokenFromRequest: (req) => req.body._csrf,
+    });
+    console.log("csrfSync instance keys:", Object.keys(csrfSyncInstance));
+    generateToken = csrfSyncInstance.generateToken;
+    doubleCsrfProtection = csrfSyncInstance.csrfSynchronisedProtection;
 } else {
-  // ✅ En test → bypass complet
-  generateCsrfToken = () => "test-token";
-  doubleCsrfProtection = (req, res, next) => next();
+    generateToken = () => "test-token";
+    doubleCsrfProtection = (req, res, next) => next();
 }
 
-/**
- * Génère un token CSRF pour les vues SSR
- *
- * @param {import("express").Request} req
- * @param {import("express").Response} res
- * @returns {string}
- */
-export function generateToken(req, res) {
-  return generateCsrfToken(req, res);
-}
-
-export { doubleCsrfProtection };
+console.log("generateToken type:", typeof generateToken);
+export { generateToken, doubleCsrfProtection };
 
 // ═══════════════════════════════════════════════════════════════
 // COOKIES

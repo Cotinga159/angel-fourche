@@ -1,0 +1,23 @@
+<main>
+    <h1>Modifier mon profil</h1>
+
+    <form action="/users/update" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <label>Nom d'utilisateur</label>
+        <input type="text" name="nameUser" value="<%= currentUser.nameUser %>">
+
+        <label>Email</label>
+        <input type="email" name="email" value="<%= currentUser.email %>">
+
+        <label>Nouveau mot de passe</label>
+        <input type="password" name="password" placeholder="Laisser vide pour ne pas changer">
+
+        <label>Confirmer le mot de passe</label>
+        <input type="password" name="passwordConfirm">
+
+        <button type="submit">💾 Enregistrer</button>
+    </form>
+
+    <a href="/users">← Retour au profil</a>
+</main>
