@@ -1,4 +1,6 @@
+
 <main>
+<div class="recipe-show">
     <h1><%= recipe.title %></h1>
     
     <div class="rating-summary">
@@ -24,33 +26,58 @@
         <img src="<%= recipe.picture %>" alt="<%= recipe.title %>" width="300">
     <% } %>
     <% if (user) { %>
-    <button 
-        class="favorite-btn" 
-        data-recipe-id="<%= recipe.id %>"
-        data-favorite="<%= isFavorite %>">
-        <%= isFavorite ? '❤️' : '🤍' %>
-    </button>
-<% } %>
+                        <div class="con-like">
+                            <input 
+                                class="like show-like <%= isFavorite ? 'no-animate' : '' %>" 
+                                type="checkbox" 
+                                <%= isFavorite ? 'checked' : '' %>
+                                data-recipe-id="<%= recipe.id %>">
+                            <div class="checkmark">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="background" viewBox="0 0 24 24">
+                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
+                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
+                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
+                                    <polygon class="poly" points="10,10 20,20"></polygon>
+                                    <polygon class="poly" points="10,50 20,50"></polygon>
+                                    <polygon class="poly" points="20,80 30,70"></polygon>
+                                    <polygon class="poly" points="90,10 80,20"></polygon>
+                                    <polygon class="poly" points="90,50 80,50"></polygon>
+                                    <polygon class="poly" points="80,80 70,70"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                    <% } %>
 <p><%= recipe.description %></p>
-    <p>Préparation : <%= recipe.preparationTime %> min</p>
+<div class="reicpe-show-info">
     <p>Difficulté : <%= recipe.difficulty %></p>
+    <p>Préparation : <%= recipe.preparationTime %> min</p>
     <p>Personne : <%= recipe.serving %></p>
+    </div>
+    <div class="ingredient">
     <h3>Ingrédients :</h3>
     <ul>
         <% recipe.ingredient.forEach(ing => { %>
-            <li><%= ing.quantity %> <%= ing.unit %> — <%= ing.name %></li>
+            <li class="ingredient-list"><p><%= ing.name %></p> <p><%= ing.quantity %> <%= ing.unit %></p></li>
         <% }) %>
     </ul>
-
+    </div>
     <h3>Étapes :</h3>
     <ol>
         <% recipe.step.forEach(s => { %>
             <li><%= s.instruction %></li>
+            <br>
         <% }) %>
     </ol>
+    <div class="rating-recipe">
     <h3>Donner une note</h3>
     <% if (user) { %>
-    <form action="/ratings/<%= recipe.id %>" method="POST" id="rating-form">
+    <form action="/ratings/<%= recipe.id %>" method="POST" id="rating-form" class="rating-form">
         <input type="hidden" name="value" id="rating-value" value="">
         <div class="star-rating"><% for(let i = 1; i <= 5; i++) { %><span class="star empty star-input" data-value="<%= i %>">☆</span><% } %></div>
         <button type="submit">Noter</button>
@@ -59,6 +86,8 @@
 <% } else { %>
         <p><a href="/auth/login">Connectez-vous</a> pour donner une note</p>
 <% } %>
+</div>
+<div class="comment-post">
     <h3>Laisser un commentaire</h3>
     <% if (user) { %>
     <form action="/comments/<%= recipe.id %>" method="POST">
@@ -68,26 +97,33 @@
 <% } else { %>
     <p><a href="/auth/login">Connectez-vous</a> pour commenter</p>
 <% } %>
-    <h3>Commentaires (<%= comments.length %>)</h3>
+</div>
+    <h3 class="comments-toggle">
+    <button id="toggle-comments" type="button">
+    Commentaires (<%= comments.length %>) ▾
+</button>
+</h3>
 
-<% if (comments.length > 0) { %>
-    <% comments.forEach(comment => { %>
-    <div class="comment">
-        <strong><%= comment.nameUser %></strong>
-        <p><%= comment.content %></p>
-        <small><%= new Date(comment.createdAt).toLocaleDateString() %></small>
+<div id="comments-container">
+    <% if (comments.length > 0) { %>
+        <% comments.forEach(comment => { %>
+        <div class="comment">
+            <strong><%= comment.nameUser %></strong>
+            <p><%= comment.content %></p>
+            <small><%= new Date(comment.createdAt).toLocaleDateString() %></small>
 
-        <% if (user && comment.userId === user) { %>
-        <form action="/comments/<%= comment.id %>/delete" method="POST">
-        <input type="hidden" name="recipeId" value="<%= recipe.id %>">
-        <button type="submit">Supprimer</button>
-</form>
-        <% } %>
-    </div>
-<% }) %>
-<% } else { %>
-    <p>Aucun commentaire pour le moment.</p>
-<% } %>
+            <% if (user && comment.userId === user) { %>
+            <form action="/comments/<%= comment.id %>/delete" method="POST">
+                <input type="hidden" name="recipeId" value="<%= recipe.id %>">
+                <button type="submit">Supprimer</button>
+            </form>
+            <% } %>
+        </div>
+        <% }) %>
+    <% } else { %>
+        <p>Aucun commentaire pour le moment.</p>
+    <% } %>
+</div>
 <script>
         const stars = document.querySelectorAll('.star-input');
         const ratingValue = document.getElementById('rating-value');
@@ -137,21 +173,56 @@
                 });
             });
         });
-        document.querySelectorAll('.favorite-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const recipeId = btn.dataset.recipeId;
-            try {
-                await fetch(`/favorites/${recipeId}`, { 
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' }
-                });
-                const isFav = btn.dataset.favorite === 'true';
-                btn.dataset.favorite = String(!isFav);
-                btn.textContent = !isFav ? '❤️' : '🤍';
-            } catch (err) {
-                console.error('Erreur favori:', err);
-            }
-        });
+document.querySelectorAll('.show-like').forEach(input => {
+    input.addEventListener('change', async () => {
+        input.classList.remove('no-animate');
+        
+        const recipeId = input.dataset.recipeId;
+        try {
+            await fetch(`/favorites/${recipeId}`, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' }
+            });
+        } catch (err) {
+            console.error('Erreur favori:', err);
+            input.checked = !input.checked;
+            return;
+        }
+
+if (input.checked) {
+    const checkmark = input.nextElementSibling;
+    const filled = checkmark.querySelector('.filled');
+    const celebrate = checkmark.querySelector('.celebrate');
+    
+    // Reset
+    filled.style.animation = 'none';
+    celebrate.style.animation = 'none';
+    celebrate.style.visibility = 'visible';
+    
+    requestAnimationFrame(() => {
+        filled.style.animation = 'kfr-filled 0.5s forwards';
+        celebrate.style.animation = 'kfr-celebrate 0.5s forwards';
+        
+        setTimeout(() => {
+            celebrate.style.visibility = 'hidden';
+        }, 500);
     });
+}
+    });
+});
+const btn = document.getElementById('toggle-comments');
+const container = document.getElementById('comments-container');
+
+btn.addEventListener('click', () => {
+    const isHidden = getComputedStyle(container).display === 'none';
+    if (isHidden) {
+        container.style.display = 'block';
+        btn.innerHTML = 'Commentaires ▾';
+    } else {
+        container.style.display = 'none';
+        btn.innerHTML = 'Commentaires ▸';
+    }
+});
 </script>
+</div>
 </main>

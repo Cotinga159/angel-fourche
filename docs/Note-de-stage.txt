@@ -114,64 +114,29 @@ Ajout de la fonctionnalité de commenter une recette
 Ajout de la fonctionnalité de noté une recette
 Ajout de la fonctionnalité de de mettre un recette en favori
 
-1 config/
+Jour 21
 
-Commence par la config de la base de données, JWT, variables d’environnement.
+Ajout de la fonctionnalité de trié une recette
+Ajout de la page profil
 
-Sans ça, rien d’autre ne peut fonctionner.
+Jour 22
 
-2 entities/ (ou models si tu préfères)
+Ajout de la fonctionnalité de crée une recette, modifier et suprimer
+Ajout du moteur de recherche
 
-Définis tes entités : User, Recipe, Category, Comment.
+Jour 23
 
-Même si tu n’utilises pas ORM, ça te sert de référence pour les tables et les DTO.
+Finalisation du moteur de recherche
+Ajout de la fonctionnalité de modifier un utilisateur et le suprimer
+Mise en place des données sur la page d'acceuil
+Correction du token csrf et mise a jour de la connexion et de l'inscription
 
-3 repositories/
+Jour 25
 
-Crée les fonctions pour accéder à la base de données (CRUD).
+Début de création de la navbar
+Ajout de ressource d'icon via fontawesome.com
 
-Ex : userRepository.js, recipeRepository.js.
+Jour 26
 
-4 services/
-
-Implémente la logique métier : validation des droits, calcul de notes, ajout de recette, etc.
-
-Ces services utiliseront tes repositories.
-
-5 validators/
-
-Créé les validateurs pour les données entrantes (email, mot de passe, recette valide, etc.).
-
-6 controllers/
-
-Implémente les endpoints qui utilisent les services et validators.
-
-Ex : recipeController.js, userController.js.
-
-7 routes/
-
-Lie tes controllers aux URLs (express Router).
-
-Ex : /recipes, /users.
-
-8 middlewares/
-
-Authentification, gestion des erreurs, vérification des rôles.
-
-Tu peux les créer en parallèle ou après les controllers/routes.
-
-9 utils/
-
-Fonctions utilitaires, helpers (hash password, générer token, formatage date, etc.).
-
-À utiliser dans services ou middleware si besoin.
-
-10 views/
-
-Si tu as du front côté serveur (templates, ejs/pug), sinon tu peux le faire après le backend fonctionnel.
-
-11 dto/
-
-Optionnel : si tu veux définir les objets d’entrée/sortie.
-
-Peut être fait en parallèle des validators/services.
+Page recettes
+ - Création du css de la carte recette

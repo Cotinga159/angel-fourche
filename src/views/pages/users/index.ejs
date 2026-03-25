@@ -6,11 +6,9 @@
         <a href="/users/edit">
     <button>✏️ Modifier mon profil</button>
 </a>
-        <form action="/users/delete" method="POST"
-    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">
+<form action="/users/delete" method="POST" id="delete-account-form">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    
-    <button type="submit">🗑️ Supprimer mon compte</button>
+    <button type="submit" id="delete-btn">🗑️ Supprimer mon compte</button>
 </form>
 
         <p>Recettes publiées : 
@@ -63,9 +61,8 @@
             <a href="/recipes/<%= recipe.id %>/edit">
                 <button>✏️ Modifier</button>
                 </a>
-            <form action="/recipes/<%= recipe.id %>/delete" method="POST" 
-                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer « <%= recipe.title %> » ? Cette action est irréversible.')">
-                
+            <form action="/recipes/<%= recipe.id %>/delete" method="POST" class="delete-recipe-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit">🗑️ Supprimer</button>
             </form>
         </div>
@@ -86,4 +83,22 @@
 <% } else { %>
     <p>Vous n'avez pas encore de recette favorite.</p>
 <% } %>
+
+<script>
+    // Confirmation suppression compte
+    document.getElementById('delete-account-form').addEventListener('submit', function(e) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
+            e.preventDefault();
+        }
+    });
+
+        // Confirmation suppression recette
+    document.querySelectorAll('.delete-recipe-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette recette ? Cette action est irréversible.')) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
 </main>
