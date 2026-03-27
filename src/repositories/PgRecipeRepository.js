@@ -210,14 +210,14 @@ static async searchByKeyword(keyword) {
 }
 static async getTopFavoritesWeek() {
     const { rows } = await db.query(`
-        SELECT * FROM v_recipes_top_favorites_week LIMIT 6
+        SELECT * FROM v_recipes_top_favorites_week LIMIT 4
     `);
     return rows.map(row => new Recipe(row));
 }
 
 static async getTopRated() {
     const { rows } = await db.query(`
-        SELECT * FROM v_recipes_top_rated LIMIT 6
+        SELECT * FROM v_recipes_top_rated LIMIT 7
     `);
     return rows.map(row => new Recipe(row));
 }

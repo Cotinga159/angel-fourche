@@ -1,25 +1,27 @@
-<main>
+<main class="login-container">
     <h1>Connexion</h1>
 
     <% if (locals.flash && locals.flash.error) { %>
-    <p style="color:red"><%= locals.flash.error %></p>
-<% } %>
-<% if (locals.flash && locals.flash.success) { %>
-    <p style="color:green"><%= locals.flash.success %></p>
-<% } %>
+        <p class="error"><%= locals.flash.error %></p>
+    <% } %>
 
-    <form action="/auth/login" method="POST">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <form action="/auth/login" method="POST" class="login-card">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-        <label>Email ou nom d'utilisateur</label>
-        <input type="text" name="email" required>
+        <div class="form-row">
+            <label>Email ou nom d'utilisateur</label>
+            <input type="text" name="email" required>
+        </div>
 
-        <label>Mot de passe</label>
-        <input type="password" name="password" required>
+        <div class="form-row">
+            <label>Mot de passe</label>
+            <input type="password" name="password" required>
+        </div>
 
         <button type="submit">Se connecter</button>
     </form>
 
-    <p>Pas encore de compte ? <a href="/auth/register">S'inscrire</a></p>
-    
+    <p class="redirect">
+        Pas encore de compte ? <a href="/auth/register">S'inscrire</a>
+    </p>
 </main>

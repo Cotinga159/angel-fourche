@@ -1,23 +1,28 @@
 <main>
-    <h1>Modifier mon profil</h1>
-
-    <form action="/users/update" method="POST">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-
-        <label>Nom d'utilisateur</label>
-        <input type="text" name="nameUser" value="<%= currentUser.nameUser %>">
-
-        <label>Email</label>
-        <input type="email" name="email" value="<%= currentUser.email %>">
-
-        <label>Nouveau mot de passe</label>
-        <input type="password" name="password" placeholder="Laisser vide pour ne pas changer">
-
-        <label>Confirmer le mot de passe</label>
-        <input type="password" name="passwordConfirm">
-
-        <button type="submit">💾 Enregistrer</button>
-    </form>
-
-    <a href="/users">← Retour au profil</a>
+    <div class="login-container">
+        <h1>Modifier mon profil</h1>
+        <div class="login-card">
+            <form action="/users/update" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="form-row">
+                    <label>Pseudo</label>
+                    <input type="text" name="nameUser" value="<%= currentUser.nameUser %>">
+                </div>
+                <div class="form-row">
+                    <label>Email</label>
+                    <input type="email" name="email" value="<%= currentUser.email %>">
+                </div>
+                <div class="form-row">
+                    <label>Nouveau mot de passe</label>
+                    <input type="password" name="password" placeholder="Laisser vide">
+                </div>
+                <div class="form-row">
+                    <label>Confirmer</label>
+                    <input type="password" name="passwordConfirm">
+                </div>
+                <button type="submit">💾 Enregistrer</button>
+            </form>
+            <a href="/users" class="redirect">← Retour au profil</a>
+        </div>
+    </div>
 </main>

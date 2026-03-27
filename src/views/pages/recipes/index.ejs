@@ -28,50 +28,50 @@
 
 <div id="recipes-container" class="recipes-container">
     <% recipes.forEach(recipe => { %>
-    <div class="recipe-item" 
-        data-rating="<%= recipe.averageRating || 0 %>" 
-        data-difficulty="<%= recipe.difficulty %>" 
-        data-flavor="<%= recipe.typeFlavor %>"
-        data-diet="<%= recipe.typeDiet %>">
-    <a href="/recipes/<%= recipe.id %>">
-        <div class="recipe-card">
-            <img src="<%= recipe.picture %>" alt="<%= recipe.title %>">
-            <h2><%= recipe.title %></h2>
-        </div>
-    </a>
-    <div class="recipe-info">
-        <div class="difficulty">
-            <% 
-            const levels = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
-            const currentLevel = levels[recipe.difficulty] || 1;
-            %>
-                <% for(let i = 1; i <= 3; i++) { %>
-                    <span class="flame-icon <%= i <= currentLevel ? 'active' : 'inactive' %>">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="20" height="20">
-                            <path d="M256.5 37.6C265.8 29.8 279.5 30.1 288.4 38.5C300.7 50.1 311.7 62.9 322.3 75.9C335.8 92.4 352 114.2 367.6 140.1C372.8 133.3 377.6 127.3 381.8 122.2C382.9 120.9 384 119.5 385.1 118.1C393 108.3 402.8 96 415.9 96C429.3 96 438.7 107.9 446.7 118.1C448 119.8 449.3 121.4 450.6 122.9C460.9 135.3 474.6 153.2 488.3 175.3C515.5 219.2 543.9 281.7 543.9 351.9C543.9 475.6 443.6 575.9 319.9 575.9C196.2 575.9 96 475.7 96 352C96 260.9 137.1 182 176.5 127C196.4 99.3 216.2 77.1 231.1 61.9C239.3 53.5 247.6 45.2 256.6 37.7zM321.7 480C347 480 369.4 473 390.5 459C432.6 429.6 443.9 370.8 418.6 324.6C414.1 315.6 402.6 315 396.1 322.6L370.9 351.9C364.3 359.5 352.4 359.3 346.2 351.4C328.9 329.3 297.1 289 280.9 268.4C275.5 261.5 265.7 260.4 259.4 266.5C241.1 284.3 207.9 323.3 207.9 370.8C207.9 439.4 258.5 480 321.6 480z"/>
-                        </svg>
-                    </span>
-                <% } %>
-        </div>
-        
-        <div class="recipe-info-bottom">
-            <div class="stars">
-                <% for(let i = 1; i <= 5; i++) { %>
-                    <% if(i <= Math.round(recipe.averageRating || 0)) { %>
-                        <span class="star full">★</span>
-                    <% } else { %>
-                        <span class="star empty">☆</span>
-                    <% } %>
-                <% } %>
-            </div>
+        <div class="recipe-item" 
+            data-rating="<%= recipe.averageRating || 0 %>" 
+            data-difficulty="<%= recipe.difficulty %>" 
+            data-flavor="<%= recipe.typeFlavor %>"
+            data-diet="<%= recipe.typeDiet %>">
+            <a href="/recipes/<%= recipe.id %>">
+                <div class="recipe-card">
+                    <img src="<%= recipe.picture %>" alt="<%= recipe.title %>">
+                    <h2><%= recipe.title %></h2>
+                </div>
+            </a>
+            <div class="recipe-info">
+                <div class="difficulty">
+                    <% 
+                    const levels = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
+                    const currentLevel = levels[recipe.difficulty] || 1;
+                    %>
+                        <% for(let i = 1; i <= 3; i++) { %>
+                            <span class="flame-icon <%= i <= currentLevel ? 'active' : 'inactive' %>">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="20" height="20">
+                                    <path d="M256.5 37.6C265.8 29.8 279.5 30.1 288.4 38.5C300.7 50.1 311.7 62.9 322.3 75.9C335.8 92.4 352 114.2 367.6 140.1C372.8 133.3 377.6 127.3 381.8 122.2C382.9 120.9 384 119.5 385.1 118.1C393 108.3 402.8 96 415.9 96C429.3 96 438.7 107.9 446.7 118.1C448 119.8 449.3 121.4 450.6 122.9C460.9 135.3 474.6 153.2 488.3 175.3C515.5 219.2 543.9 281.7 543.9 351.9C543.9 475.6 443.6 575.9 319.9 575.9C196.2 575.9 96 475.7 96 352C96 260.9 137.1 182 176.5 127C196.4 99.3 216.2 77.1 231.1 61.9C239.3 53.5 247.6 45.2 256.6 37.7zM321.7 480C347 480 369.4 473 390.5 459C432.6 429.6 443.9 370.8 418.6 324.6C414.1 315.6 402.6 315 396.1 322.6L370.9 351.9C364.3 359.5 352.4 359.3 346.2 351.4C328.9 329.3 297.1 289 280.9 268.4C275.5 261.5 265.7 260.4 259.4 266.5C241.1 284.3 207.9 323.3 207.9 370.8C207.9 439.4 258.5 480 321.6 480z"/>
+                                </svg>
+                            </span>
+                        <% } %>
+                </div>
                 
-            <% if (user) { %>
-                <div class="con-like">
-                    <input 
-                        class="like <%= favoriteIds.includes(recipe.id) ? 'no-animate' : '' %>" 
-                        type="checkbox" 
-                        <%= favoriteIds.includes(recipe.id) ? 'checked' : '' %>
-                        data-recipe-id="<%= recipe.id %>">
+                <div class="recipe-info-bottom">
+                    <div class="stars">
+                        <% for(let i = 1; i <= 5; i++) { %>
+                            <% if(i <= Math.round(recipe.averageRating || 0)) { %>
+                                <span class="star full">★</span>
+                            <% } else { %>
+                                <span class="star empty">☆</span>
+                            <% } %>
+                        <% } %>
+                    </div>
+                        
+                    <% if (user) { %>
+                        <div class="con-like">
+                            <input 
+                                class="like <%= favoriteIds.includes(recipe.id) ? 'no-animate' : '' %>" 
+                                type="checkbox" 
+                                <%= favoriteIds.includes(recipe.id) ? 'checked' : '' %>
+                                data-recipe-id="<%= recipe.id %>">
                             <div class="checkmark">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="background" viewBox="0 0 24 24">
                                     <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
@@ -91,12 +91,12 @@
                                     <polygon class="poly" points="80,80 70,70"></polygon>
                                 </svg>
                             </div>
+                        </div>
+                    <% } %>
                 </div>
-            <% } %>
+            </div>
         </div>
-    </div>
-</div>
-<% }) %>
+    <% }) %>
 </div>
 
 <script>

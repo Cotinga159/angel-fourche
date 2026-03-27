@@ -1,7 +1,7 @@
-<main>
+<main class="recipe-create">
     <h1>Modifier la recette</h1>
 
-    <form action="/recipes/<%= recipe.id %>/update" method="POST">
+    <form action="/recipes/<%= recipe.id %>/update" method="POST" class="create-recipe-form">
 <br>
         <label for="title">Titre de la recette</label>
         <input type="text" id="title" name="title" value="<%= recipe.title %>" required>
