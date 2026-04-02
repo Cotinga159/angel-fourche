@@ -29,7 +29,8 @@ class RecipeRepository {
         user_pseudo,
         average_rating,
         ratings_count,
-        comments_count
+        comments_count,
+        favorites_count
         FROM v_recipes_complete
         WHERE id_recipe = $1;
         `;
@@ -40,17 +41,20 @@ class RecipeRepository {
     return new Recipe(rows[0]);
     }
 
-    static async findByUserId(userId) {
-        const query = /*sql*/ `
-        SELECT *
-        FROM v_recipes_with_author
-        WHERE id_user = $1
-        ORDER BY created_at DESC;
-        `;
-
-        const { rows } = await db.query(query, [userId]);
-        return rows.map((row) => new Recipe(row));
-    }
+static async findByUserId(userId) {
+    const query = /*sql*/ `
+    SELECT *
+    FROM v_recipes_complete
+    WHERE user_id = $1
+    ORDER BY created_at DESC;
+    `;
+    const { rows } = await db.query(query, [userId]);
+    return rows.map((row) => {
+        row.step = Array.isArray(row.step) ? row.step : [];
+        row.ingredient = Array.isArray(row.ingredient) ? row.ingredient : [];
+        return new Recipe(row);
+    });
+}
 
     // Liste des recettes avec auteur et rating
 

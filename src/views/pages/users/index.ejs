@@ -46,7 +46,7 @@
                         <div class="recipe-info">
                             <div class="recipe-info-bar">
                                 <div class="card-counters">
-                                    <div class="counter-item">
+                                    <div class="counter-favorite">
                                         <img src="./images/heart_complet.svg" alt="">
                                         <span><%= recipe.favoritesCount ?? 0 %></span>
                                     </div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </a>
-              <div class="my-recipe-actions">
+            <div class="my-recipe-actions">
     <a href="/recipes/<%= recipe.id %>/edit">
         <button>Modifier</button>
     </a>

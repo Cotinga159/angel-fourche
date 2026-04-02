@@ -10,6 +10,16 @@ class AuthService {
     if (password !== passwordConfirm) {
         throw new Error("Les mots de passe ne correspondent pas.");
     }
+
+    if (!password || password.length < 8) {
+        throw new Error("Le mot de passe doit contenir au moins 8 caractères.");
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+        throw new Error("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial (!@#$%...).");
+    }
+
     if (await UserRepository.existsByEmail(email)) {
         throw new Error("Cet email est déjà utilisé.");
     }

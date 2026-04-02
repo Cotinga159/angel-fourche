@@ -19,6 +19,7 @@ router.get("/", requireAuth, async (req, res) => {
     try {
         const userId = req.session.userId;
         const recipes = await RecipeService.getByUser(userId);
+        console.log("recipe[0] complet:", JSON.stringify(recipes[0]));
         const stats = await UserRepository.findProfilWithStats(userId);
         const favorites = await FavoriteRepository.getByUser(userId);
         res.render("pages/users/index", { 
