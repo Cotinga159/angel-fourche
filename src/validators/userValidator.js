@@ -37,9 +37,12 @@ export const registerSchema = z.object({
     .min(passwordMin, {
         message: `Le mot de passe doit contenir au moins ${passwordMin} caractères`,
     })
-    .max(100, { message: "Le mot de passe est trop long" }),
-
-    userName: z
+    .max(100, { message: "Le mot de passe est trop long" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/, {
+        message: "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial",
+    }),
+    passwordConfirm: z.string(),
+    nameUser: z
     .string()
     .min(3, { message: "Le pseudo est trop court" })
     .max(50, { message: "Le pseudo est trop long" })
@@ -47,7 +50,7 @@ export const registerSchema = z.object({
         message: "Le pseudo ne peut contenir que lettres, chiffres, ., _ et -",
     }),
 
-    gdpr_consent: stringToBoolean,
+    gdprConsent: stringToBoolean,
 });
 
 /**
@@ -66,7 +69,7 @@ export const updateProfileSchema = z.object({
     email: z.email({ message: "Format d'email invalide" }).min(5).max(255).optional(),
     password: z.string().min(passwordMin).max(100).optional(),
     name_user: z.string().min(3).max(50).regex(PSEUDO_REGEX).optional(),
-    gdpr_consent: stringToBoolean,
+    gdprConsent: stringToBoolean,
 });
 
 /* ---------- Helpers exportés (optionnel) ---------- */

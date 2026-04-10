@@ -1,6 +1,7 @@
 "use strict";
 
 import RecipeRepository from "../repositories/PgRecipeRepository.js";
+import { schemas } from "../validators/recipeValidator.js";
 
 class RecipeService {
 
@@ -14,14 +15,12 @@ class RecipeService {
 
     static async create(data) {
 
-        if (!data.title || !data.title.trim()) {
-            throw new Error("Le titre de la recette ne peut pas être vide");
-        }
-        if (!data.userId) {
-            throw new Error("Un utilisateur doit être associé à la recette");
-        }
-
-        return RecipeRepository.create(data);
+        const parsed = schemas.create.parse(data);
+        
+        return RecipeRepository.create({
+        ...data,  
+        ...parsed 
+    });
     }
 static async search(query) {
     if (!query || !query.trim()) return [];

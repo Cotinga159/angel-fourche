@@ -1,5 +1,6 @@
 "use strict";
 import RatingRepository from "../repositories/PgRatingRepository.js";
+import { schemas } from "../validators/ratingValidator.js";
 
 class RatingService {
 
@@ -9,20 +10,26 @@ class RatingService {
     }
 
     // Ajouter une note
-    static async add(userId, recipeId, score) {
-        if (score < 1 || score > 5) {
-            throw new Error("Score must be between 1 and 5");
-        }
-        return RatingRepository.create({ userId, recipeId, score });
+static async add(userId, recipeId, score) {
+    console.log("ZOD CHECK score:", score);
+    const result = schemas.create.safeParse({ recipe_id: recipeId, score });
+    console.log("ZOD RESULT:", result);
+    if (!result.success) {
+        const firstError = result.error.errors[0].message;
+        throw new Error(firstError);
     }
+    return RatingRepository.create({ userId, recipeId, score });
+}
 
 
     // Mettre à jour une note existante
-    static async update(ratingId, score) {
-        if (score < 1 || score > 5) {
-            throw new Error("Score must be between 1 and 5");
+    static async update(id, score) {
+        const result = schemas.update.safeParse({ score });
+        if (!result.success) {
+            const firstError = result.error.errors[0].message;
+            throw new Error(firstError);
         }
-        return RatingRepository.update(ratingId, score);
+        return RatingRepository.update(id, score);
     }
 
     // Supprimer une note

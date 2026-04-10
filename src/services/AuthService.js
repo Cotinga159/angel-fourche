@@ -1,38 +1,34 @@
 "use strict";
 import UserRepository from "../repositories/PgUserRepository.js";
 import { hashPassword, verifyPassword } from "../utils/passwordHelper.js";
-
+import { registerSchema } from "../validators/userValidator.js";
 
 
 class AuthService {
 
-    static async register({ email, password, passwordConfirm, nameUser, gdprConsent }) {
+   static async register(body) {
+    const result = registerSchema.safeParse(body);
+    if (!result.success) {
+        const firstError = result.error.errors[0].message;
+        throw new Error(firstError);
+    }
+
+    const { email, password, passwordConfirm, nameUser, gdprConsent } = result.data;
+
     if (password !== passwordConfirm) {
         throw new Error("Les mots de passe ne correspondent pas.");
-    }
-
-    if (!password || password.length < 8) {
-        throw new Error("Le mot de passe doit contenir au moins 8 caractères.");
-    }
-
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-        throw new Error("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial (!@#$%...).");
     }
 
     if (await UserRepository.existsByEmail(email)) {
         throw new Error("Cet email est déjà utilisé.");
     }
+
     if (await UserRepository.existsByNameUser(nameUser)) {
         throw new Error("Ce nom d'utilisateur est déjà utilisé.");
     }
+
     const passwordHash = await hashPassword(password);
-    return UserRepository.create({
-        email,
-        passwordHash,
-        nameUser,
-        gdprConsent,
-    });
+    return UserRepository.create({ email, passwordHash, nameUser, gdprConsent });
 }
 
     static async login({ email, password }) {
