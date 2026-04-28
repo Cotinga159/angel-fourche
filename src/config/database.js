@@ -5,7 +5,7 @@ import { logger } from "./logger.js";
 
 const { Pool } = pg;
 
-// Vérification de sécurité au demarrage
+// Vérification de sécurité au démarrage
 if (!process.env.DATABASE_URL) {
     const errorMsg =
       "La variable DATABASE_URL est manquante dans le fichier .env ";
@@ -24,7 +24,7 @@ export const pool = new Pool({
   idleTimeoutMillis: 30000,
 });
 
-// Evenements du pool pour le monitoring
+// Événements du pool pour le monitoring
 pool.on("connect", () => {
   logger.debug("🐘 PostgreSQL connected");
 });

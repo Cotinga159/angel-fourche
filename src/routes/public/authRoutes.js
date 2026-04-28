@@ -1,7 +1,7 @@
 "use strict";
 import { Router } from "express";
 import AuthController from "../../controllers/auth/AuthController.js";
-import { doubleCsrfProtection } from "../../config/security.js";
+import { doubleCsrfProtection, authLimiter } from "../../config/security.js";
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.post("/auth/login", (req, res, next) => {
     console.log("body._csrf:", req.body._csrf);
     console.log("cookie csrf:", req.cookies.csrf);
     next();
-}, doubleCsrfProtection, AuthController.handleLogin);
+}, authLimiter, doubleCsrfProtection, AuthController.handleLogin);
 
 router.post("/auth/logout", AuthController.logout); 
 console.log(">>> authRoutes chargé ✅");

@@ -111,16 +111,18 @@ const steps = Array.isArray(req.body.step)
         console.log("recette créée:", recipe);
         req.flash("success", "Recette ajoutée !");
         res.redirect("/recipes");
-    } catch (error) {
-        console.log("ERREUR création recette:", error.message);
-        req.flash("error", error.message);
-        res.redirect("/recipes");
-    }
+} catch (error) {
+    req.session.oldInput = req.body;
+    req.flash("error", error.message);
+    await new Promise((resolve) => req.session.save(resolve));
+    return res.redirect(303, "/recipes/new");
+}
 }
 
-    async showCreateForm(req, res) {
+async showCreateForm(req, res) {
     try {
-        res.render("pages/recipes/new");
+        const categories = await CategoryRepository.findAll();
+        res.render("pages/recipes/new", { categories });
     } catch (error) {
         req.flash("error", error.message);
         res.redirect("/recipes");

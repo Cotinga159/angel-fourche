@@ -1,82 +1,80 @@
 <main class="recipe-create">
     <h1>Créer une recette</h1>
-
     <form action="/recipes/create" method="POST" class="create-recipe-form">
-
+<% if (locals.flash && locals.flash.error) { %>
+    <p class="error"><%= locals.flash.error %></p>
+<% } %>
         <label for="title">Titre de la recette</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" value="<%= locals.oldInput.title || '' %>" required>
 <br>
         <label for="description">Description</label>
-        <textarea id="description" name="description" required></textarea>
+        <textarea id="description" name="description" required><%= locals.oldInput.description || '' %></textarea>
 <br>
-
         <h3>Ingrédients</h3>
         <div id="ingredients-container">
             <div class="ingredient-item">
-                <input type="number" name="ingredient_quantity[]" placeholder="Quantité">
-                <input type="text" name="ingredient_unit[]" placeholder="Unité (g, kg, tbsp...)">
-                <input type="text" name="ingredient_name[]" placeholder="Nom" required>
+                <input type="number" name="ingredient_quantity[]" placeholder="Quantité" value="<%= (locals.oldInput.ingredient_quantity && locals.oldInput.ingredient_quantity[0]) || '' %>">
+                <input type="text" name="ingredient_unit[]" placeholder="Unité (g, kg, tbsp...)" value="<%= (locals.oldInput.ingredient_unit && locals.oldInput.ingredient_unit[0]) || '' %>">
+                <input type="text" name="ingredient_name[]" placeholder="Nom" value="<%= (locals.oldInput.ingredient_name && locals.oldInput.ingredient_name[0]) || '' %>" required>
             </div>
         </div>
-            <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
-
+        <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
         <h3>Instructions</h3>
         <div id="steps-container">
             <div class="step-item">
-                <textarea name="step[]" placeholder="Instruction 1" required></textarea>
+                <textarea name="step[]" placeholder="Instruction 1" required><%= (locals.oldInput.step && locals.oldInput.step[0]) || '' %></textarea>
             </div>
         </div>
         <button type="button" id="add-step">+ Ajouter une instruction</button>
 <br>
         <label for="preparation_time">Temps de préparation (minutes)</label>
-        <input type="number" id="preparation_time" name="preparation_time" min="1" required>
+        <input type="number" id="preparation_time" name="preparation_time" min="1" value="<%= locals.oldInput.preparation_time || '' %>" required>
 <br>
         <label for="serving">Nombre de portions</label>
-        <input type="number" id="serving" name="serving" min="1" required>
+        <input type="number" id="serving" name="serving" min="1" value="<%= locals.oldInput.serving || '' %>" required>
 <br>
         <label for="difficulty">Difficulté</label>
         <select id="difficulty" name="difficulty">
-        <option value="Facile">Facile</option>
-        <option value="Moyen">Moyen</option>
-        <option value="Difficile">Difficile</option>
+            <option value="Facile" <%= (locals.oldInput.difficulty === 'Facile') ? 'selected' : '' %>>Facile</option>
+            <option value="Moyen" <%= (locals.oldInput.difficulty === 'Moyen') ? 'selected' : '' %>>Moyen</option>
+            <option value="Difficile" <%= (locals.oldInput.difficulty === 'Difficile') ? 'selected' : '' %>>Difficile</option>
         </select>
 <br>
         <label for="picture">Image de la recette (URL)</label>
-        <input type="url" id="picture" name="picture" placeholder="https://...">
+        <input type="url" id="picture" name="picture" placeholder="https://..." value="<%= locals.oldInput.picture || '' %>">
 <br>
         <label for="type_diet">Type de régime</label>
         <select id="type_diet" name="type_diet">
-        <option value="">Aucun</option>
-        <option value="végétarien">Végétarien</option>
-        <option value="vegan">Vegan</option>
-        <option value="omnivore">Omnivore</option>
-    </select>
-    <br>
+            <option value="" <%= (!locals.oldInput.type_diet) ? 'selected' : '' %>>Aucun</option>
+            <option value="végétarien" <%= (locals.oldInput.type_diet === 'végétarien') ? 'selected' : '' %>>Végétarien</option>
+            <option value="vegan" <%= (locals.oldInput.type_diet === 'vegan') ? 'selected' : '' %>>Vegan</option>
+            <option value="omnivore" <%= (locals.oldInput.type_diet === 'omnivore') ? 'selected' : '' %>>Omnivore</option>
+        </select>
+<br>
         <label for="diet_religious">Régime religieux</label>
         <select id="diet_religious" name="diet_religious">
-        <option value="">Aucun</option>
-        <option value="halal">Halal</option>
-        <option value="casher">Casher</option>
-        <option value="hindou">Hindou</option>
+            <option value="" <%= (!locals.oldInput.diet_religious) ? 'selected' : '' %>>Aucun</option>
+            <option value="halal" <%= (locals.oldInput.diet_religious === 'halal') ? 'selected' : '' %>>Halal</option>
+            <option value="casher" <%= (locals.oldInput.diet_religious === 'casher') ? 'selected' : '' %>>Casher</option>
+            <option value="hindou" <%= (locals.oldInput.diet_religious === 'hindou') ? 'selected' : '' %>>Hindou</option>
         </select>
 <br>
         <label for="type_flavor">Type de goût</label>
         <select id="type_flavor" name="type_flavor">
-        <option value="">Aucun</option>
-        <option value="sucre">Sucré</option>
-        <option value="salé">Salé</option>
+            <option value="" <%= (!locals.oldInput.type_flavor) ? 'selected' : '' %>>Aucun</option>
+            <option value="sucre" <%= (locals.oldInput.type_flavor === 'sucre') ? 'selected' : '' %>>Sucré</option>
+            <option value="salé" <%= (locals.oldInput.type_flavor === 'salé') ? 'selected' : '' %>>Salé</option>
         </select>
 <br>
-<label for="category_id">Catégorie</label>
-<select id="category_id" name="category_id" required>
-    <option value="">-- Choisir une catégorie --</option>
-    <% categories.forEach(cat => { %>
-        <option value="<%= cat.id %>"><%= cat.nameCategory %></option>
-    <% }) %>
-</select>
+        <label for="category_id">Catégorie</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">-- Choisir une catégorie --</option>
+            <% categories.forEach(cat => { %>
+                <option value="<%= cat.id %>" <%= (locals.oldInput.category_id === cat.id) ? 'selected' : '' %>><%= cat.nameCategory %></option>
+            <% }) %>
+        </select>
 <br>
         <button type="submit">Publier</button>
-
     </form>
 </main>
 

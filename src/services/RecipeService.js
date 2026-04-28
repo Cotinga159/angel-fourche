@@ -13,15 +13,19 @@ class RecipeService {
         return RecipeRepository.findByUserId(userId);
     }
 
-    static async create(data) {
-
-        const parsed = schemas.create.parse(data);
-        
-        return RecipeRepository.create({
-        ...data,  
-        ...parsed 
-    });
+static async create(data) {
+    const result = schemas.create.safeParse(data);
+    
+    if (!result.success) {
+        const firstError = result.error.issues[0].message;
+        throw new Error(firstError);
     }
+    
+    return RecipeRepository.create({
+        ...data,
+        ...result.data
+    });
+}
 static async search(query) {
     if (!query || !query.trim()) return [];
     return RecipeRepository.search(query.trim());
