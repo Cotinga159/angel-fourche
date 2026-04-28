@@ -4,14 +4,15 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "node --env-file=.env --watch src/app.js",
-    "db:init": "sh ./scripts/init_db.sh",
-    "db:reset": "sh ./scripts/reset_db.sh",
-    "db:nuke": "sh ./scripts/nuke_db.sh",
-    "db:run": "sh ./scripts/run_sql.sh",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+  "start": "node --env-file=.env src/app.js",
+  "start:prod": "node --env-file=.env.prod src/app.js",
+  "dev": "node --env-file=.env --watch src/app.js",
+  "db:migrate": "node --env-file=.env src/database/migrations/runAll.js",
+  "db:migrate:prod": "node --env-file=.env.prod src/database/migrations/runAll.js",
+  "db:nuke": "node --env-file=.env src/database/migrations/nukeAll.js",
+  "db:nuke:prod": "node --env-file=.env.prod src/database/migrations/nukeAll.js",
+  "gen:secrets": "node ./scripts/gen-secrets.js",
+  "gen:secrets:prod": "node ./scripts/gen-secrets.js --prod"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.0.2",

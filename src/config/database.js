@@ -13,15 +13,13 @@ if (!process.env.DATABASE_URL) {
     throw new Error(errorMsg);
 }
 
+const useSSL = process.env.DB_SSL === "true";
+
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  // Nécessaire si la DB est en ligne (Render, Neon, Vercel, Supabase)
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : false,
-  max: 20,
-  idleTimeoutMillis: 30000,
+connectionString: process.env.DATABASE_URL,
+ssl: useSSL ? { rejectUnauthorized: false } : false,
+max: 10,
+idleTimeoutMillis: 30000,
 });
 
 // Événements du pool pour le monitoring
