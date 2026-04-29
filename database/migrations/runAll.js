@@ -18,6 +18,22 @@ async function runAllMigrations() {
         "./tables/05_add_ratings_table.sql",
         "./tables/06_add_favorites_table.sql",
         "./tables/07_add_user_session.sql",
+           "../views/01_v_recipes_with_author_view.sql",
+    "../views/02_v_recipes_with_rating_view.sql",
+    "../views/03_v_recipes_complete_view.sql",
+    "../views/04_v_recipes_with_comments_view.sql",
+    "../views/05_v_user_profile_stats_view.sql",
+    "../views/06_v_recipes_favorites_views.sql",
+    "../views/07_v_recipes_search_view.sql",
+    "../views/08_v_recipes_top_favorites_week_view.sql",
+    "../views/09_v_recipes_top_rated_view.sql",
+    "../views/10_v_recipes_top_by_category_view.sql",
+        "../seeders/01_add_users_seeders.sql",
+    "../seeders/02_add_categories_seeders.sql",
+    "../seeders/03_add_recipes_seeders.sql",
+    "../seeders/04_add_comments_seeders.sql",
+    "../seeders/05_add_ratings_seeders.sql",
+    "../seeders/06_add_favorites_seeders.sql",
     ];
 
     for (const file of files) {
