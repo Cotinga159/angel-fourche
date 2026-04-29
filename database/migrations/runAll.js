@@ -1,4 +1,4 @@
-import { pool } from "../config/database.js";
+import { pool } from "../../src/config/database.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
