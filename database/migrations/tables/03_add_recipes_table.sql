@@ -1,7 +1,7 @@
 SET CLIENT_ENCODING TO 'UTF8';
 
 CREATE TABLE IF NOT EXISTS recipes (
-    id_recipe UUID DEFAULT uuidv7() PRIMARY KEY,
+    id_recipe UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES users (id_user) ON DELETE CASCADE,
     category_id UUID NOT NULL REFERENCES categories (id_category) ON DELETE SET NULL,
     title CITEXT NOT NULL,

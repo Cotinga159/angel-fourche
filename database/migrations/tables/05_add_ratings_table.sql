@@ -1,6 +1,6 @@
 SET CLIENT_ENCODING TO 'UTF8';
 CREATE TABLE IF NOT EXISTS ratings (
-    id_rating UUID DEFAULT uuidv7() PRIMARY KEY,
+    id_rating UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES users (id_user) ON DELETE CASCADE,
     recipe_id UUID NOT NULL REFERENCES recipes (id_recipe) ON DELETE CASCADE,
     score INTEGER NOT NULL CHECK (score BETWEEN 1 AND 5),

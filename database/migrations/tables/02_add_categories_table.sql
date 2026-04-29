@@ -1,7 +1,7 @@
 SET CLIENT_ENCODING TO 'UTF8';
 
 CREATE TABLE IF NOT EXISTS categories (
-    id_category UUID DEFAULT uuidv7() PRIMARY KEY,
+    id_category UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name_category CITEXT UNIQUE NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
