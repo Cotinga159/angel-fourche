@@ -10,7 +10,7 @@ async function runAllMigrations() {
     const files = [
         "./config/03_add_extensions.sql",
         "./config/04_add_types.sql",
-        "./triggers/01_add_trigger_set_timestamp.sql",
+        "../triggers/01_add_trigger_set_timestamp.sql",
         "./tables/01_add_users_table.sql",
         "./tables/02_add_categories_table.sql",
         "./tables/03_add_recipes_table.sql",
