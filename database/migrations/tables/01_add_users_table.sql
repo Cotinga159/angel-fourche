@@ -1,7 +1,7 @@
 SET CLIENT_ENCODING TO 'UTF8';
 
 CREATE TABLE IF NOT EXISTS users (
-    id_user UUID DEFAULT uuidv7 () PRIMARY KEY,
+    id_user UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     email CITEXT UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     name_user CITEXT UNIQUE NOT NULL,
