@@ -1750,12 +1750,14 @@ input:focus {
     box-shadow: none;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+
 
 @media (max-width: 520px) { 
     .login-card {
-        width: 100%;
+        width: 80%;
+    }
+
+    .recipe-show {
+        width: 80%;
     }
 }
