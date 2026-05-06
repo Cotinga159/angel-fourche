@@ -653,7 +653,7 @@ fieldset label input[type="radio"]:hover {
    ============================================================ */
 .recipe-show {
     max-width: 800px;
-    width: 100%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
@@ -1475,7 +1475,7 @@ header p {
     padding: 25px;
     background: var(--color-login-bg);
     border-radius: 15px;
-    width: 450px;
+    /* width: 450px; */
 }
 
 .login-card form {
@@ -1751,7 +1751,7 @@ input:focus {
 }
 
 
-
+/* 
 @media (max-width: 520px) { 
     .login-card {
         width: 80%;
@@ -1760,4 +1760,4 @@ input:focus {
     .recipe-show {
         width: 80%;
     }
-}
+} */
